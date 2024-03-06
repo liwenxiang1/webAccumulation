@@ -2,7 +2,13 @@
  * @Author: liwenxiang
  * @Date: 2024-03-03 18:09:23
  * @LastEditors: liwenxiang
- * @LastEditTime: 2024-03-03 19:33:52
+ * @LastEditTime: 2024-03-05 15:58:22
+ */
+/*
+ * @Author: liwenxiang
+ * @Date: 2024-03-03 18:09:23
+ * @LastEditors: liwenxiang
+ * @LastEditTime: 2024-03-04 20:57:33
  */
 import { defaultTheme } from '@vuepress/theme-default'
 import { defineUserConfig } from 'vuepress/cli'
@@ -10,9 +16,9 @@ import { webpackBundler } from '@vuepress/bundler-webpack'
 
 export default defineUserConfig({
 	lang: 'zh-CN',
-  base: "/webAccumulation/",
-	title: '李文香的前端积累',
-	description: '哇哈哈哈',
+	base: '/webAccumulation/',
+	title: '前端积累',
+	description: '前路漫漫，任重道远',
 
 	theme: defaultTheme({
 		// 默认主题配置
@@ -23,7 +29,7 @@ export default defineUserConfig({
 			},
 			{
 				text: '前端积累',
-				link: '/accumulation/'
+				link: '/accumulation/prototype'
 			},
 			{
 				text: 'CSDN',
@@ -34,7 +40,19 @@ export default defineUserConfig({
 			{
 				collapsable: false,
 				sidebarDepth: 1,
-				children: ['/accumulation/prototype']
+				children: [
+					'/accumulation/prototype',
+					'/accumulation/apply',
+					'/accumulation/websocket',
+					'/accumulation/arrowFun',
+					'/accumulation/eventLoop',
+					'/accumulation/defineProperty',
+					'/accumulation/val',
+					'/accumulation/array',
+          '/accumulation/deepclone',
+          '/accumulation/setAndmap',
+          
+				]
 			}
 		]
 	}),
