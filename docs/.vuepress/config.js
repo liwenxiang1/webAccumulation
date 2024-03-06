@@ -2,7 +2,7 @@
  * @Author: liwenxiang
  * @Date: 2024-03-03 18:09:23
  * @LastEditors: liwenxiang
- * @LastEditTime: 2024-03-05 15:58:22
+ * @LastEditTime: 2024-03-06 21:55:41
  */
 /*
  * @Author: liwenxiang
@@ -32,6 +32,10 @@ export default defineUserConfig({
 				link: '/accumulation/prototype'
 			},
 			{
+				text: '大屏案例',
+				link: 'https://github.com/liwenxiang1/bigScreen'
+			},
+			{
 				text: 'CSDN',
 				link: 'https://blog.csdn.net/weixin_42569598'
 			}
@@ -49,9 +53,8 @@ export default defineUserConfig({
 					'/accumulation/defineProperty',
 					'/accumulation/val',
 					'/accumulation/array',
-          '/accumulation/deepclone',
-          '/accumulation/setAndmap',
-          
+					'/accumulation/deepclone',
+					'/accumulation/setAndmap'
 				]
 			}
 		]
