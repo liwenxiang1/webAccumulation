@@ -2,7 +2,7 @@
  * @Author: liwenxiang
  * @Date: 2024-03-03 18:09:23
  * @LastEditors: “liwx” “1258598654qq.com”
- * @LastEditTime: 2024-08-20 10:10:26
+ * @LastEditTime: 2024-08-20 17:49:32
  */
 import { webpackBundler } from '@vuepress/bundler-webpack';
 import { defaultTheme } from '@vuepress/theme-default';
@@ -15,6 +15,8 @@ export default defineUserConfig({
   description: '前路漫漫，任重道远',
   port: '5000',
   theme: defaultTheme({
+    lastUpdated: false, //隐藏lastUpdated
+    contributors: false, //隐藏 contributors
     // 默认主题配置
     navbar: [
       {
@@ -49,7 +51,7 @@ export default defineUserConfig({
     sidebar: {
       '/accumulation/': [
         {
-          // collapsable: false,
+          collapsable: false,
           text: '前端积累',
           link: '/accumulation/prototype',
           sidebarDepth: 1, //显示上一篇，下一篇
