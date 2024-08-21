@@ -47,6 +47,10 @@ export default defineUserConfig({
         text: 'CSDN',
         link: 'https://blog.csdn.net/weixin_42569598',
       },
+      {
+        text: 'github',
+        link: 'https://github.com/liwenxiang1/webAccumulation',
+      },
     ],
     sidebar: {
       '/accumulation/': [
