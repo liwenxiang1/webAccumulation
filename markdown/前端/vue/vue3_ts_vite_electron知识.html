@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.8" />
+    <style>
+      :root {
+        --c-bg: #fff;
+      }
+      html.dark {
+        --c-bg: #22272e;
+      }
+      html,
+      body {
+        background-color: var(--c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme')
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+        document.documentElement.classList.toggle('dark', true)
+      }
+    </script>
+    <title>vue3+ts+vite知识 | 前端积累</title><meta name="description" content="前路漫漫，任重道远">
+    <link rel="stylesheet" href="/webAccumulation/assets/css/styles.90a43054.css">
+    <link rel="preload" href="/webAccumulation/assets/js/runtime~app.6364d75d.js" as="script"><link rel="preload" href="/webAccumulation/assets/css/styles.90a43054.css" as="style"><link rel="preload" href="/webAccumulation/assets/js/1587.243dee9a.js" as="script"><link rel="preload" href="/webAccumulation/assets/js/app.c3805aab.js" as="script">
+    <link rel="prefetch" href="/webAccumulation/assets/js/index.html.d303262c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/Vue开发技巧.html.5de9466b.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/numberUtil.html.c7d96e9e.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/数据库操作符.html.cac6f4fb.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/websocket.html.82627460.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/vue3_ts_vite_electron知识.html.8ad754bf.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/arrayUtils.html.0ac6fb20.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/LRU缓存机制.html.25b5eab5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/typeof.html.b73bcea9.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/删除一个字母的回文.html.674f80a1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/落单的数.html.67ada50e.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/vue知识.html.a5176b07.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/爬楼梯.html.ab7b77ea.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/dateUtil.html.e36ba2a8.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/userAgent.html.baab3675.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/js方法.html.fa0e3dbd.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/mobilePull.html.ea0702bf.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/regExp.html.a66385c3.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/NativeJs蓝牙Gatt连接1.html.7bfe1132.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/更新文档.html.c3947a34.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/第三方验证码.html.62cf0ac1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/setAndmap.html.7ca5ff07.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/两数之和.html.5c8284cc.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/螺旋矩阵.html.8ec169ba.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/uniapp在移动端打开pdf文件.html.7458ee57.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/最小路径和.html.781aac64.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/最大子数组.html.4e7bf768.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/第一个只出现一次的字符.html.4c58913b.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/相亲数.html.e77d6713.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/两个字符串是变位词.html.e983b7c2.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/app-loading.html.6f54c4f5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/fixed.html.56ca3096.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/爬楼梯2.html.8a9d0d3d.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/摆动序列.html.4853ba2b.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/查询文档.html.4cf813b5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/deepclone.html.9fb63b1a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/统计数字.html.b5695d5d.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/安卓系统手势解锁.html.f8b036e2.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/arrowFun.html.32197753.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/uniapp使用renderjs.html.bb75126a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/最长回文子串.html.eca95230.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/括号生成.html.0573fd1b.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/查找斐波纳契数列中第 N 个数.html.77cfa121.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/我的Eslint自动校验配置.html.d9c6031a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/跳跃游戏2.html.3e1cac2a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/无重复字符的最长子串.html.841a766c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/奇偶分割数组.html.181b373a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/132模式.html.af99ce92.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/eventLoop.html.dc022e66.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/二叉树的层序遍历.html.a5b2a41e.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/字符串密钥格式.html.3ec0969f.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/安排会议日程.html.9900cc56.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/prototype.html.b999fef7.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/nodeUtile.html.93d1815d.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/字符串压缩.html.aa7531fd.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/三数之和.html.a38008a0.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/水仙花数.html.189af999.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/合并排序数组.html.0ef6a4bc.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/反转整数.html.1490383b.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/搜索旋转排序数组.html.a2095d37.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/二叉树的锯齿形层次遍历.html.35c6d4f8.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/数组中的最长单词.html.b39b9723.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/原地删除数组元素.html.e66f30ef.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/盛最多水的容器.html.a67e8062.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/二叉树的右视图.html.f350db98.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/第k大元素.html.076f146d.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/复原IP地址.html.c10f7633.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/删除链表的倒数第N个节点.html.2aaa7bf1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/姓名去重.html.2d9ff083.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/中位数.html.f329a214.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/岛屿数量.html.d3e559e6.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/合并区间.html.3def6f33.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/NativeJs蓝牙Gatt连接.html.28b813bd.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/搜索二维矩阵.html.60ed9a44.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/行星碰撞.html.f71fff02.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/使用UniCloud总结.html.e5002320.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/css知识.html.6671a609.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/判断字符串的循环移动.html.ea35e7c1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/找到和为零的子数组.html.37fb1a61.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/比较字符串.html.be93b353.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/readConfig.html.ca681e1c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/js基础.html.fb1edb08.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/defineProperty.html.e7498908.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/丑数.html.cd57e9aa.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/统计重复个数.html.82925245.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/反转一个3位整数.html.1feb0617.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/highcharts.html.af45fc08.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/array.html.fc2a545d.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/uniapp前端使用uQRCode生成二维码带文字.html.f77cf158.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/丢失的数.html.200c055c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/数组重复次数.html.657739a5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/全排列.html.ad1afec4.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/个人工具箱.html.b992aa23.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/检测 2 的幂次.html.c631c0ac.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/零钱兑换.html.7f4637a8.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/分解质因数.html.a17a9ec1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/Cordova.html.97febe70.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/progress.html.637386e2.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/转置矩阵.html.89dc6114.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/奇数未小于相邻偶数为的值.html.d2be9aab.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/跳跃游戏.html.2990b832.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/get-started.html.ba763161.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/text-overflow.html.185303ea.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/instanceof.html.d2293372.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/apply.html.ceb2a419.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/divScroll.html.bcb40f04.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/微信公众号.html.25a61c6e.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/20210823新增.html.d48a748c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/应用框架.html.0eb69a28.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/vue项目介绍.html.97a07f27.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/浏览器自动识别数字成电话号码.html.ccb3ea42.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/Canvas绘制效果.html.c66573b6.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/vant组件使用遇到的问题.html.11ecffc1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/删除文档.html.14185364.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/elementui使用.html.1cf816da.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/unicloud前端网页托管.html.fcdf8bf5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/uniapp原生问题.html.2c5c9209.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/markdown.html.e4705368.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/console.html.f0d9c190.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/第3讲API接口说明@20181025.html.66d029b7.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/Dcloud生态产品的使用.html.9d44a62c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/新增文档.html.5f768cb7.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/nuxt知识.html.67e21f4a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/val.html.37562fe4.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/前端实现翻书效果-turn.js优化.html.d5993430.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/codeBlock.html.4475fba5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/404.html.e49ac6f8.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme-container"><!--[--><header class="navbar"><div class="toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a class="route-link" href="/webAccumulation/"><!----><span class="site-name" aria-hidden="true">前端积累</span></a></span><div class="navbar-items-wrapper" style=""><!--[--><!--]--><nav class="navbar-items can-hide" aria-label="site navigation"><!--[--><div class="navbar-item"><a class="route-link" href="/webAccumulation/" aria-label="首页"><!--[--><!--]--> 首页 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/accumulation/prototype.html" aria-label="前端积累"><!--[--><!--]--> 前端积累 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/utils/codeBlock.html" aria-label="代码块"><!--[--><!--]--> 代码块 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/algorithm/" aria-label="算法"><!--[--><!--]--> 算法 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/html/css%E7%9F%A5%E8%AF%86.html" aria-label="知识记录"><!--[--><!--]--> 知识记录 <!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://github.com/liwenxiang1/bigScreen" rel="noopener noreferrer" target="_blank" aria-label="大屏案例"><!--[--><!--]--> 大屏案例 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://blog.csdn.net/weixin_42569598" rel="noopener noreferrer" target="_blank" aria-label="CSDN"><!--[--><!--]--> CSDN <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button class="toggle-color-mode-button" title="toggle color mode"><svg style="" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg style="display:none;" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><!----></div></header><!--]--><div class="sidebar-mask"></div><!--[--><aside class="sidebar"><nav class="navbar-items" aria-label="site navigation"><!--[--><div class="navbar-item"><a class="route-link" href="/webAccumulation/" aria-label="首页"><!--[--><!--]--> 首页 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/accumulation/prototype.html" aria-label="前端积累"><!--[--><!--]--> 前端积累 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/utils/codeBlock.html" aria-label="代码块"><!--[--><!--]--> 代码块 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/algorithm/" aria-label="算法"><!--[--><!--]--> 算法 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/html/css%E7%9F%A5%E8%AF%86.html" aria-label="知识记录"><!--[--><!--]--> 知识记录 <!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://github.com/liwenxiang1/bigScreen" rel="noopener noreferrer" target="_blank" aria-label="大屏案例"><!--[--><!--]--> 大屏案例 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://blog.csdn.net/weixin_42569598" rel="noopener noreferrer" target="_blank" aria-label="CSDN"><!--[--><!--]--> CSDN <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><ul class="sidebar-items"><!--[--><li><p tabindex="0" class="sidebar-item sidebar-heading active collapsible">前端 <span class="down arrow"></span></p><ul style="" class="sidebar-item-children"><!--[--><li><p tabindex="0" class="sidebar-item">html <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/html/css%E7%9F%A5%E8%AF%86.html" aria-label="css知识"><!--[--><!--]--> css知识 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/html/js%E6%96%B9%E6%B3%95.html" aria-label="js 方法"><!--[--><!--]--> js 方法 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/html/js%E5%9F%BA%E7%A1%80.html" aria-label="js基础"><!--[--><!--]--> js基础 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><p tabindex="0" class="sidebar-item active">vue <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link route-link-active sidebar-item active" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/vue/vue3_ts_vite_electron%E7%9F%A5%E8%AF%86.html" aria-label="vue3+ts+vite知识"><!--[--><!--]--> vue3+ts+vite知识 <!--[--><!--]--></a><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/#一、vue3常用的知识" aria-label="一、vue3常用的知识"><!--[--><!--]--> 一、vue3常用的知识 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/#二、vue3遇到的问题" aria-label="二、vue3遇到的问题"><!--[--><!--]--> 二、vue3遇到的问题 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/#三、typescript的知识" aria-label="三、typescript的知识"><!--[--><!--]--> 三、typescript的知识 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/#四、electron的知识" aria-label="四、electron的知识"><!--[--><!--]--> 四、electron的知识 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/vue/vue%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D.html" aria-label="vue项目介绍"><!--[--><!--]--> vue项目介绍 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/vue/vue%E7%9F%A5%E8%AF%86.html" aria-label="vue知识"><!--[--><!--]--> vue知识 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><p tabindex="0" class="sidebar-item">uniapp <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/uniapp/Dcloud%E7%94%9F%E6%80%81%E4%BA%A7%E5%93%81%E7%9A%84%E4%BD%BF%E7%94%A8.html" aria-label="Dcloud生态产品的使用"><!--[--><!--]--> Dcloud生态产品的使用 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/uniapp/uniapp%E4%BD%BF%E7%94%A8renderjs.html" aria-label="uniapp使用renderjs"><!--[--><!--]--> uniapp使用renderjs <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/uniapp/uniapp%E5%8E%9F%E7%94%9F%E9%97%AE%E9%A2%98.html" aria-label="uniapp原生问题处理"><!--[--><!--]--> uniapp原生问题处理 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/uniapp/uniapp%E5%9C%A8%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%89%93%E5%BC%80pdf%E6%96%87%E4%BB%B6.html" aria-label="uniapp项目在移动端打开Pdf文件"><!--[--><!--]--> uniapp项目在移动端打开Pdf文件 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><p tabindex="0" class="sidebar-item">微信小程序 <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%AA%E4%BA%BA%E5%B7%A5%E5%85%B7%E7%AE%B1.html" aria-label="个人超级工具箱"><!--[--><!--]--> 个人超级工具箱 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><p tabindex="0" class="sidebar-item">第三方库 <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/Cordova.html" aria-label="Cordova文档"><!--[--><!--]--> Cordova文档 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/elementui%E4%BD%BF%E7%94%A8.html" aria-label="elementui 使用"><!--[--><!--]--> elementui 使用 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/highcharts.html" aria-label="highcharts"><!--[--><!--]--> highcharts <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/nuxt%E7%9F%A5%E8%AF%86.html" aria-label="nuxt知识"><!--[--><!--]--> nuxt知识 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/uniapp%E5%89%8D%E7%AB%AF%E4%BD%BF%E7%94%A8uQRCode%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%B8%A6%E6%96%87%E5%AD%97.html" aria-label="uniapp前端使用uQRCode生成二维码带文字的图片"><!--[--><!--]--> uniapp前端使用uQRCode生成二维码带文字的图片 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/vant%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98.html" aria-label="vant组件使用遇到的问题"><!--[--><!--]--> vant组件使用遇到的问题 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><p tabindex="0" class="sidebar-item">UniCloud <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/20210823%E6%96%B0%E5%A2%9E.html" aria-label="20210823新增"><!--[--><!--]--> 20210823新增 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3.html" aria-label="查询文档"><!--[--><!--]--> 查询文档 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E6%9B%B4%E6%96%B0%E6%96%87%E6%A1%A3.html" aria-label="更新文档"><!--[--><!--]--> 更新文档 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3.html" aria-label="删除文档"><!--[--><!--]--> 删除文档 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E4%BD%BF%E7%94%A8UniCloud%E6%80%BB%E7%BB%93.html" aria-label="使用UniCloud总结"><!--[--><!--]--> 使用UniCloud总结 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E7%AC%A6.html" aria-label="数据库操作符"><!--[--><!--]--> 数据库操作符 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E6%96%B0%E5%A2%9E%E6%96%87%E6%A1%A3.html" aria-label="新增文档"><!--[--><!--]--> 新增文档 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/unicloud%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E6%89%98%E7%AE%A1.html" aria-label="unicloud前端网页托管"><!--[--><!--]--> unicloud前端网页托管 <!--[--><!--]--></a><!----></li><!--]--></ul></li><!--]--></ul></li><!--]--></ul><!--[--><!--]--></aside><!--]--><!--[--><main class="page"><!--[--><!--]--><div class="theme-default-content"><!--[--><!--]--><div><h1 id="vue3-ts-vite知识" tabindex="-1"><a class="header-anchor" href="#vue3-ts-vite知识"><span>vue3+ts+vite知识</span></a></h1><h3 id="一、vue3常用的知识" tabindex="-1"><a class="header-anchor" href="#一、vue3常用的知识"><span>一、vue3常用的知识</span></a></h3><ul><li>1.按钮跳转死路由可以直接使用<code>router-link</code>标签，否则只能通过下面的代码实现路由跳转<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>import {useRouter} from &#39;vue-router&#39;;
+const router = useRouter()
+router.push({path: &#39;/home&#39;})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>2.0 父组件-&gt;子组件传参实现，子组件回传参数给父组件<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>// ========子组件SignView.vue========
+import {reactive} from &quot;vue&quot;;
+const props = defineProps({
+  signing: {//正在签署中
+    type: Boolean,
+    default: false
+  },
+  backData: {//返回结果
+    type: Function
+  },
+})
+const xxx=()=&gt;{
+  props.backData(aaa)
+}
+&lt;div v-if=&quot;!props.signing&quot;&gt;
+// ========父组件========
+&lt;sign-view :signing=&quot;data.signing&quot; :backData=&quot;(val)=&gt;state.adbValid=val&quot;&gt;&lt;/sign-view&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>2.1父组件调用子组件的方法：<code>defineExpose({ getDeviceInfo})</code>、<code>ref=&quot;deviceInfoView&quot;</code>、<code>deviceInfoView.value.getDeviceInfo()</code><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>//========子组件：DeviceInfo.vue========
+import {reactive} from &quot;vue&quot;;
+const getDeviceInfo = async () =&gt; { ... }
+defineExpose({
+  getDeviceInfo,
+})
+
+//========父组件：logcat.vue========
+import { ref } from &#39;vue&#39;
+import DeviceInfo from &quot;../../../components/adb/DeviceInfo.vue&quot;;
+const deviceInfoView: any = ref&lt;InstanceType&lt;typeof DeviceInfo&gt;&gt;();
+
+const xxx=()=&gt;{
+  deviceInfoView.value.getDeviceInfo()
+}
+&lt;device-info ref=&quot;deviceInfoView&quot;&gt;&lt;/device-info&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>2.2组件的<code>v-model</code>实现：<code>emit(&#39;update:modelValue&#39;, false)</code>、<code>props.modelValue</code>。 如果在子组件内继续使用<code>v-model=&#39;props.modelValue&#39;</code>的话会警告甚至报错。<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>// ========子组件 child========
+import {defineEmits} from &quot;vue&quot;;
+//定义向父组件回传的方法
+let emit = defineEmits([&#39;update:modelValue&#39;])
+//定义对外的属性名
+const props = defineProps({
+  modelValue: {//显示，隐藏弹窗。v-model传入的数据
+    type: Boolean,
+    default: false,
+  }
+})
+//调用回传方法修改源数据
+const closeDialog = (name) =&gt; {
+  ...
+  emit(&#39;update:modelValue&#39;, false)
+}
+
+// ========父组件========
+&lt;child v-model=&quot;state.showDeviceStorageDialog&quot;&gt;&lt;/child&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>2.3组件的<code>v-model</code>实现：在上面的基础上使用<code>computed</code>对象的<code>get</code>、<code>set</code>方法使用<code>props.modelValue</code> 就可以在子组件内继续使用<code>v-model=&#39;computedValue&#39;</code>了。<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>//只需要定义一个computed生成的变量，定义get方法绑定props.modelValue的值，set方法使用emit回传修改的值。
+import {computed,defineEmits} from &quot;vue&quot;;
+//定义向父组件回传的方法
+let emit = defineEmits([&#39;update:modelValue&#39;])
+//定义对外的属性名
+const props = defineProps({
+  modelValue: {//显示，隐藏弹窗。v-model传入的数据
+    type: Boolean,
+    default: false,
+  }
+})
+const computedValue = computed({
+    get() {
+      return props.modelValue;
+    },
+    set(value) {
+      emit(&#39;update:modelValue&#39;, value)
+    }
+  }
+)
+# 子组件内继续使用computedValue变量
+&lt;van-field v-model=&quot;computedValue&quot;&gt;&lt;/van-field&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>3.<code>watch</code>方法使用（第一次渲染页面watch并不会触发），<code>watchEffect</code>使用（第一次进入就会触发）<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>//不加 flush: &#39;post&#39;的话，watch监听是在Dom元素更新之前执行的。加上的话就是Dom元素更新之后执行的。
+watch(source, callback, {
+  flush: &#39;post&#39;
+})
+watchEffect(callback, {
+  flush: &#39;post&#39;
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>import {watch,watchEffect} from &quot;vue&quot;;
+watch(
+  () =&gt; props.modelValue,
+  async (newVal, oldVal) =&gt; {
+    console.log(&quot;watch=====&gt;&quot;, newVal)
+    if (newVal) {
+      state.selectMode.selectDir = &#39;&#39;//显示弹窗的时候就重置selectPackageName这个字段
+      resetQuery()
+    }
+  }
+)
+# 另一种写法
+const message = ref(&quot;小猪课堂&quot;);
+const newMessage = computed(() =&gt; {
+  return message.value;
+});
+const number = reactive({ count: 0 });
+
+watch(message, (newValue, oldValue) =&gt; {...});
+watch(newMessage, (newValue, oldValue) =&gt; {...});
+watch(number, (newValue, oldValue) =&gt; {...}); //已经实现了深度监听
+watch(() =&gt; number,(newValue, oldValue) =&gt; {...},{ deep: true }); //使用 getter 函数返回了响应式对象，需要手动添加深度监听
+watch(() =&gt; number.count,(newValue, oldValue) =&gt; {...});
+watch([message, () =&gt; number.count], (newValue, oldValue) =&gt; {...});
+
+# watchEffect使用
+watchEffect(()=&gt;{
+  console.log(&quot;新的值:&quot;, number.count);
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>4.<code>computed</code>方法使用<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>import {computed, ComputedRef} from &quot;vue&quot;;
+
+const filterStorageDirs: ComputedRef&lt;Array&lt;any&gt;&gt; = computed(() =&gt; {
+  return state.storageDirs.filter(item =&gt; item.name.toLowerCase().indexOf(state.searchValue) != -1)
+})
+const adbEnvInfo = computed(() =&gt; {
+  return state.adbInfo.adbValid ? &quot;项目adb环境正常！&quot; : &quot;项目adb环境错误！&quot;
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>5.<code>onMounted</code>生命周期使用<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>import {onMounted} from &quot;vue&quot;;
+onMounted(async () =&gt; {
+  await initLocalSaveDirEnv()
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>6.图片资源使用<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>//一、动态使用
+const getPhoneIcon = (value) =&gt; {
+  return new URL(`../../assets/img/selectPhoneBrand/icon_${value}.png`, import.meta.url).href
+}
+
+//二、动态引用
+import right_icon_available from &quot;../../../assets/img/installSteps/right_icon_available.png&quot;
+import right_icon_disable from &quot;../../../assets/img/installSteps/right_icon_disable.png&quot;
+
+const nextImageBtnSrc = computed(() =&gt; {
+  return data.currentImageIndex &gt;= data.currentPhoneResource.length - 1 ? right_icon_disable : right_icon_available
+})
+
+//三、获取目录下的所有文件
+const resource0 = import.meta.glob(&#39;/src/assets/img/installSteps/step1/resource0/*.png&#39;)
+const resource0Imgs=Object.keys(resource0)
+
+//四、动态样式background-image使用
+const currentPhoneImageStyle = computed(() =&gt; {
+  let url = data.currentPhoneResource.length &amp;&amp; data.currentPhoneResource[data.currentImageIndex]
+  let style = {backgroundImage: &#39;url(&#39; + `${url}` + &#39;)&#39;}
+  return style
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>7.使用指令功能实现一个防止多次点击的功能<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>//一、在全局样式中定义禁用类样式
+.disabled-class {
+  pointer-events: none;
+}
+//二、给`vue`对象添加禁用指令
+# global_utils.ts
+export default {
+  //自定义节流操作
+  ReClick: {
+    mounted(el: any, binding: any) {
+      // console.log(&quot;ReClick==&gt;&quot;, el, binding)
+      // console.log(&quot;ReClick==&gt;&quot;, el.className, binding)
+      el.addEventListener(&#39;click&#39;, () =&gt; {
+        console.log(&quot;ReClick==&gt;&quot;, binding.value)
+        console.log(&quot;ReClick==&gt;&quot;, el.disabled)
+        if (el.className.indexOf(&#39;disabled-class&#39;) == -1) {
+          el.className = el.className + &quot; disabled-class&quot;;
+          setTimeout(() =&gt; {
+            el.className = el.className.replace(&quot; disabled-class&quot;, &quot;&quot;)
+          }, binding.value || 1200)
+        }
+      })
+    }
+  }
+}
+# main.ts
+import global_utils from &quot;./utils/global_utils&quot;;
+app.directive(&#39;reclick&#39;, global_utils.ReClick);
+//三、禁用指令的使用
+&lt;van-button v-reclick&gt;&lt;/van-button&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>8.使用<code>store</code>数据缓存，使用的库是：<code>pinia</code><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code># 第一步：添加 pinia 依赖
+
+# 第二步：在main.ts中使用 pinia
+
+import {createPinia} from &#39;pinia&#39;
+let app = createApp(App)
+app.use(createPinia())
+
+# 第三步：全局创建 store 对象并添加想要的 store属性
+// store/app.ts - store具体的模块里面的代码
+import {defineStore} from &#39;pinia&#39;
+
+export const appStore = defineStore(&#39;app&#39;, {
+  state: () =&gt; ({
+    token: &quot;&quot;,
+    phoneBrand: &quot;&quot;,//手机型号
+    installStepIndex: 0,//安装步骤编号
+  }),
+  actions: {
+    setPhoneBrand(val: any) {
+      this.phoneBrand = val
+    },
+    setInstallStepIndex(val: any) {
+      this.installStepIndex = val
+    }
+  }
+})
+
+// store/index.ts - 创建全局的store对象，添加对应模块的属性
+import { appStore } from &#39;./app&#39;
+const store: any = {}
+export const registerStore = () =&gt; {
+    store.appStore = appStore()
+}
+export default store
+
+// main.ts - 在main.ts代码执行入口处注册 store 对象
+import {registerStore} from &#39;./store&#39;
+registerStore()
+
+# 第四步：在代码中的具体使用
+import store from &quot;../../store&quot;;
+store.appStore.setPhoneBrand(selectPhoneType)
+console.log(&quot;phoneBrand==&gt;&quot;, store.appStore.phoneBrand)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>9.关于<code>axios</code>的使用参考：<a href="/markdown/code/UEMActivate/src/renderer/src/api/user/index.ts" target="_blank" rel="noopener noreferrer">render-api<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a>、<a href="/markdown/code/UEMActivate/src/renderer/src/utils/request/index.ts" target="_blank" rel="noopener noreferrer">render-request<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a></li></ul><h3 id="二、vue3遇到的问题" tabindex="-1"><a class="header-anchor" href="#二、vue3遇到的问题"><span>二、vue3遇到的问题</span></a></h3><ul><li>1.打印<code>reactive</code>的数据，显示的都是<code>Proxy</code>的信息。需要使用下面的方法打印<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>console.log(JSON.parse(JSON.stringfy(xxx)))
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></li><li>2.xxx</li></ul><h3 id="三、typescript的知识" tabindex="-1"><a class="header-anchor" href="#三、typescript的知识"><span>三、typescript的知识</span></a></h3><p>typescript和JavaScript用法基本一样，正常使用即可。在需要关心数据类型的地方可以定义具体的数据类型。</p><ul><li>1.<code>type</code>和<code>interface</code>功能基本一样的，写法有点区别<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code># interface使用
+export interface IMsg {
+  source: string
+  user_id: number
+  create_time: Date
+}
+# type使用
+export type INewUser = {
+  id: number,
+  username: string,
+}
+type ISearch = {
+  join: string,
+  sql: &#39;&#39;,
+}
+export type IWhere = {
+  user: INewUser
+  search: ISearch
+}
+# 具体引用后的使用
+sqlitePlugin.deleteSqliteDataRender({user: {id: item.id}} as IWhere)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li></ul><h3 id="四、electron的知识" tabindex="-1"><a class="header-anchor" href="#四、electron的知识"><span>四、electron的知识</span></a></h3><p>有三层分别为：<code>main</code>主进程，<code>preload</code>中间层，<code>render</code>渲染层。</p><ul><li>1.主进程相当于是<code>nodejs</code>服务层，可以调用pc系统的一些功能如：文件系统，命令行功能等。</li><li>2.中间层可以调用主进程和渲染层的东西。因为渲染层是使用的vue框架，所以不直接调用渲染层。</li></ul><blockquote><p>因为渲染层使用vue框架，调用渲染层的东西比较麻烦。所以常用的调用顺序都是：【render层】-&gt;【preload层】-&gt;【main层】</p></blockquote><p><strong>知识点介绍</strong></p><ul><li>1.关于main层的代码参考：<a href="/markdown/code/UEMActivate/src/main/adb.ts" target="_blank" rel="noopener noreferrer">main-adb.ts<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a>，需要在<code>main/index.ts</code>中引入</li><li>2.关于preload层的代码参考：<a href="/markdown/code/UEMActivate/src/preload/adbApi.ts" target="_blank" rel="noopener noreferrer">preload-adbApi.ts<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a>，需要在<code>preload/index.ts</code>中注册</li><li>3.关于render层的代码参考：<a href="/markdown/code/UEMActivate/src/renderer/src/utils/plugin.ts" target="_blank" rel="noopener noreferrer">render-plugin.ts<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a>，在具体页面中可以使用。</li><li>4.关于在render-vue层的代码参考：<a href="/markdown/code/UEMActivate/src/renderer/src/components/adb/ApkAction.vue" target="_blank" rel="noopener noreferrer">render-vue-ApkAction.vue<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a></li><li>5.想要隐藏应用的菜单栏，网上说用<code>Menu.setApplicationMenu(null)</code>但是不管用。通过下面的代码实现了<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const mainWindow = new BrowserWindow({
+  ...
+  titleBarStyle: &#39;hidden&#39;,//隐藏title标题栏
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>6.如果在render层动态加载系统的文件的时候，应该加载使用main层的 <code>fs.readFileSync(filePath)</code>读取到的数据，而不是直接加载本地文件的路径。<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>//main层读取文件
+class ZipPlugin {
+  ...
+  readFileBase64Main(filePath) {
+    const result = fs.readFileSync(filePath);
+    console.log(&quot;readFileBase64==&gt;&quot;, result)
+    return result.toString(&#39;base64&#39;)
+  }
+}
+
+//render层使用文件的base64字符串加载本地资源
+const previewFile = async (item) =&gt; {
+  ...
+  let result = await window.zipApi.readFileBase64Preload(state.previewInfo.localFilePath)
+  state.previewInfo.localFileBase64 = &quot;data:image/jpg;base64,&quot; + result
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>7.安装应用时，将项目中的文件复制到应用的安装目录中，根据项目框架的区别配置的地方不一样。 <ul><li>1.针对普通的electron项目，具体看运行的命令里面的<code>--config</code>配置的是哪个配置文件<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>// build.config.win.js 或者 build.config.js
+const config={
+  extraResources:{
+    &quot;from&quot;: &quot;./resource/adb_win32&quot;,
+    &quot;to&quot;: &quot;adb&quot;
+  }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>2.针对<code>vite-electron</code>框架的项目，框架里面配置的打包的配置文件是<code>electron-builder.yml</code><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>extraResources:
+  - from: ./doc/adb_win32
+    to: adb_win32
+  - from: ./doc/data.db
+    to: data.db
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li></ul></li><li>8.在main层判断环境的信息<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>import {app} from &#39;electron&#39;
+const isBuild = app.isPackaged;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div></li><li>9.配置<code>electron</code>安装包自定义安装目录，<code>electron-builder.yml</code>中配置<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+
+# 具体介绍：
+oneClick：值为布尔类型，true时代表一键安装，false代表一步步安装
+
+perMachine：值为布尔类型，代表是否显示辅助安装程序的安装模式安装程序页面（选择按机器还是按用户）。true时代表始终按用户安装。
+
+allowToChangeInstallationDirectory：值为布尔类型，是否允许用户修改安装目录，true为允许，false为不允许
+
+displayLanguageSelector：布尔类型，是否允许选择语言(默认为系统语言)，true为允许，false为不允许
+
+language：字符串类型，默认语言
+
+guid：字符串类型，为应用软件指定guid，此guid会存放在注册表中，如果没有指定则系统会自动生成
+
+createDesktopShortcut：布尔类型或&quot;always&quot;，是否创建桌面快捷方式，true时表示创建，false表示不创建，&quot;always&quot;代表重新安装时也创建
+
+include：字符串类型，NSIS包含定制安装程序脚本的路径
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>10.针对<code>vite-electron</code>框架的项目的<code>main</code>层的热更新。在<code>package.json</code>中的<code>scripts</code>里面的命令里面添加<code>--watch</code>。<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code># package.json
+{
+  &quot;scripts&quot;: {
+    ...
+    &quot;dev&quot;: &quot;electron-vite dev --watch&quot;,
+  }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>11.main层功能示例。更多关于<code>main</code>层操作文件或者其他功能参考：<a href="/markdown/code/UEMActivate/src/main/adb.ts" target="_blank" rel="noopener noreferrer">main-adb.ts<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a>及其他代码。<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>// 使用electron自带的选择文件或者文件路径弹窗
+# 选择文件弹窗
+import {app, dialog, ipcMain} from &#39;electron&#39;
+dialog.showOpenDialog({
+  title: &quot;选择文件&quot;,
+  properties: [&quot;openFile&quot;],
+  filters: [{name: &quot;zip&quot;, extensions: [&quot;zip&quot;]}],
+} as OpenDialogOptions).then(result =&gt; {
+  console.log(result.filePaths[0])
+  if (result.filePaths.length) return this._unzipFile(result.filePaths[0], savePath);
+  else return {}
+})
+
+# 选择文件夹路径
+let {filePaths} = await dialog.showOpenDialog({
+  title: &#39;选择文件夹&#39;,
+  defaultPath: path.join(__dirname, &#39;&#39;),
+  properties: [&#39;openDirectory&#39;]
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li><li>12.关于<code>electron</code>的<code>.ico</code>应用图标的制作，使用的是<code>electron-icon-builder</code>库然后执行相应的命令生成。<div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code># package.json
+{
+  &quot;script&quot;:{
+    ...
+    &quot;build-icon&quot;: &quot;electron-icon-builder --input=./resources/icon.png --output=build --flatten&quot;
+  }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li></ul></div><!--[--><!--]--></div><footer class="page-meta"><!----><!----><!----></footer><nav class="page-nav" aria-label="page navigation"><p class="inner"><!----><span class="next"><a class="route-link" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/vue/vue%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D.html" aria-label="vue项目介绍"><!--[--><!--]--> vue项目介绍 <!--[--><!--]--></a></span></p></nav><!--[--><!--]--></main><!--]--></div><!--[--><!----><!--]--><!--]--></div>
+    <script src="/webAccumulation/assets/js/runtime~app.6364d75d.js" defer></script><script src="/webAccumulation/assets/js/1587.243dee9a.js" defer></script><script src="/webAccumulation/assets/js/app.c3805aab.js" defer></script>
+  </body>
+</html>

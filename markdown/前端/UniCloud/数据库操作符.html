@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.8" />
+    <style>
+      :root {
+        --c-bg: #fff;
+      }
+      html.dark {
+        --c-bg: #22272e;
+      }
+      html,
+      body {
+        background-color: var(--c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme')
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+        document.documentElement.classList.toggle('dark', true)
+      }
+    </script>
+    <title>数据库操作符 | 前端积累</title><meta name="description" content="前路漫漫，任重道远">
+    <link rel="stylesheet" href="/webAccumulation/assets/css/styles.90a43054.css">
+    <link rel="preload" href="/webAccumulation/assets/js/runtime~app.6364d75d.js" as="script"><link rel="preload" href="/webAccumulation/assets/css/styles.90a43054.css" as="style"><link rel="preload" href="/webAccumulation/assets/js/1587.243dee9a.js" as="script"><link rel="preload" href="/webAccumulation/assets/js/app.c3805aab.js" as="script">
+    <link rel="prefetch" href="/webAccumulation/assets/js/index.html.d303262c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/Vue开发技巧.html.5de9466b.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/numberUtil.html.c7d96e9e.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/数据库操作符.html.cac6f4fb.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/websocket.html.82627460.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/vue3_ts_vite_electron知识.html.8ad754bf.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/arrayUtils.html.0ac6fb20.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/LRU缓存机制.html.25b5eab5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/typeof.html.b73bcea9.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/删除一个字母的回文.html.674f80a1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/落单的数.html.67ada50e.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/vue知识.html.a5176b07.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/爬楼梯.html.ab7b77ea.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/dateUtil.html.e36ba2a8.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/userAgent.html.baab3675.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/js方法.html.fa0e3dbd.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/mobilePull.html.ea0702bf.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/regExp.html.a66385c3.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/NativeJs蓝牙Gatt连接1.html.7bfe1132.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/更新文档.html.c3947a34.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/第三方验证码.html.62cf0ac1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/setAndmap.html.7ca5ff07.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/两数之和.html.5c8284cc.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/螺旋矩阵.html.8ec169ba.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/uniapp在移动端打开pdf文件.html.7458ee57.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/最小路径和.html.781aac64.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/最大子数组.html.4e7bf768.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/第一个只出现一次的字符.html.4c58913b.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/相亲数.html.e77d6713.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/两个字符串是变位词.html.e983b7c2.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/app-loading.html.6f54c4f5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/fixed.html.56ca3096.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/爬楼梯2.html.8a9d0d3d.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/摆动序列.html.4853ba2b.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/查询文档.html.4cf813b5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/deepclone.html.9fb63b1a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/统计数字.html.b5695d5d.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/安卓系统手势解锁.html.f8b036e2.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/arrowFun.html.32197753.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/uniapp使用renderjs.html.bb75126a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/最长回文子串.html.eca95230.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/括号生成.html.0573fd1b.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/查找斐波纳契数列中第 N 个数.html.77cfa121.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/我的Eslint自动校验配置.html.d9c6031a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/跳跃游戏2.html.3e1cac2a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/无重复字符的最长子串.html.841a766c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/奇偶分割数组.html.181b373a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/132模式.html.af99ce92.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/eventLoop.html.dc022e66.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/二叉树的层序遍历.html.a5b2a41e.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/字符串密钥格式.html.3ec0969f.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/安排会议日程.html.9900cc56.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/prototype.html.b999fef7.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/nodeUtile.html.93d1815d.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/字符串压缩.html.aa7531fd.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/三数之和.html.a38008a0.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/水仙花数.html.189af999.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/合并排序数组.html.0ef6a4bc.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/反转整数.html.1490383b.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/搜索旋转排序数组.html.a2095d37.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/二叉树的锯齿形层次遍历.html.35c6d4f8.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/数组中的最长单词.html.b39b9723.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/原地删除数组元素.html.e66f30ef.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/盛最多水的容器.html.a67e8062.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/二叉树的右视图.html.f350db98.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/第k大元素.html.076f146d.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/复原IP地址.html.c10f7633.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/删除链表的倒数第N个节点.html.2aaa7bf1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/姓名去重.html.2d9ff083.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/中位数.html.f329a214.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/岛屿数量.html.d3e559e6.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/合并区间.html.3def6f33.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/NativeJs蓝牙Gatt连接.html.28b813bd.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/搜索二维矩阵.html.60ed9a44.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/行星碰撞.html.f71fff02.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/使用UniCloud总结.html.e5002320.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/css知识.html.6671a609.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/判断字符串的循环移动.html.ea35e7c1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/找到和为零的子数组.html.37fb1a61.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/比较字符串.html.be93b353.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/readConfig.html.ca681e1c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/js基础.html.fb1edb08.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/defineProperty.html.e7498908.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/丑数.html.cd57e9aa.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/统计重复个数.html.82925245.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/反转一个3位整数.html.1feb0617.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/highcharts.html.af45fc08.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/array.html.fc2a545d.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/uniapp前端使用uQRCode生成二维码带文字.html.f77cf158.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/丢失的数.html.200c055c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/数组重复次数.html.657739a5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/全排列.html.ad1afec4.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/个人工具箱.html.b992aa23.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/检测 2 的幂次.html.c631c0ac.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/零钱兑换.html.7f4637a8.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/分解质因数.html.a17a9ec1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/Cordova.html.97febe70.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/progress.html.637386e2.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/转置矩阵.html.89dc6114.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/奇数未小于相邻偶数为的值.html.d2be9aab.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/跳跃游戏.html.2990b832.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/get-started.html.ba763161.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/text-overflow.html.185303ea.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/instanceof.html.d2293372.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/apply.html.ceb2a419.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/divScroll.html.bcb40f04.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/微信公众号.html.25a61c6e.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/20210823新增.html.d48a748c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/应用框架.html.0eb69a28.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/vue项目介绍.html.97a07f27.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/浏览器自动识别数字成电话号码.html.ccb3ea42.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/Canvas绘制效果.html.c66573b6.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/vant组件使用遇到的问题.html.11ecffc1.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/删除文档.html.14185364.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/elementui使用.html.1cf816da.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/unicloud前端网页托管.html.fcdf8bf5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/uniapp原生问题.html.2c5c9209.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/markdown.html.e4705368.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/console.html.f0d9c190.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/第3讲API接口说明@20181025.html.66d029b7.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/Dcloud生态产品的使用.html.9d44a62c.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/新增文档.html.5f768cb7.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/nuxt知识.html.67e21f4a.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/val.html.37562fe4.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/前端实现翻书效果-turn.js优化.html.d5993430.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/codeBlock.html.4475fba5.js" as="script"><link rel="prefetch" href="/webAccumulation/assets/js/404.html.e49ac6f8.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme-container"><!--[--><header class="navbar"><div class="toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a class="route-link" href="/webAccumulation/"><!----><span class="site-name" aria-hidden="true">前端积累</span></a></span><div class="navbar-items-wrapper" style=""><!--[--><!--]--><nav class="navbar-items can-hide" aria-label="site navigation"><!--[--><div class="navbar-item"><a class="route-link" href="/webAccumulation/" aria-label="首页"><!--[--><!--]--> 首页 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/accumulation/prototype.html" aria-label="前端积累"><!--[--><!--]--> 前端积累 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/utils/codeBlock.html" aria-label="代码块"><!--[--><!--]--> 代码块 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/algorithm/" aria-label="算法"><!--[--><!--]--> 算法 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/html/css%E7%9F%A5%E8%AF%86.html" aria-label="知识记录"><!--[--><!--]--> 知识记录 <!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://github.com/liwenxiang1/bigScreen" rel="noopener noreferrer" target="_blank" aria-label="大屏案例"><!--[--><!--]--> 大屏案例 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://blog.csdn.net/weixin_42569598" rel="noopener noreferrer" target="_blank" aria-label="CSDN"><!--[--><!--]--> CSDN <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button class="toggle-color-mode-button" title="toggle color mode"><svg style="" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg style="display:none;" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><!----></div></header><!--]--><div class="sidebar-mask"></div><!--[--><aside class="sidebar"><nav class="navbar-items" aria-label="site navigation"><!--[--><div class="navbar-item"><a class="route-link" href="/webAccumulation/" aria-label="首页"><!--[--><!--]--> 首页 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/accumulation/prototype.html" aria-label="前端积累"><!--[--><!--]--> 前端积累 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/utils/codeBlock.html" aria-label="代码块"><!--[--><!--]--> 代码块 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/algorithm/" aria-label="算法"><!--[--><!--]--> 算法 <!--[--><!--]--></a></div><div class="navbar-item"><a class="route-link" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/html/css%E7%9F%A5%E8%AF%86.html" aria-label="知识记录"><!--[--><!--]--> 知识记录 <!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://github.com/liwenxiang1/bigScreen" rel="noopener noreferrer" target="_blank" aria-label="大屏案例"><!--[--><!--]--> 大屏案例 <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://blog.csdn.net/weixin_42569598" rel="noopener noreferrer" target="_blank" aria-label="CSDN"><!--[--><!--]--> CSDN <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><ul class="sidebar-items"><!--[--><li><p tabindex="0" class="sidebar-item sidebar-heading active collapsible">前端 <span class="down arrow"></span></p><ul style="" class="sidebar-item-children"><!--[--><li><p tabindex="0" class="sidebar-item">html <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/html/css%E7%9F%A5%E8%AF%86.html" aria-label="css知识"><!--[--><!--]--> css知识 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/html/js%E6%96%B9%E6%B3%95.html" aria-label="js 方法"><!--[--><!--]--> js 方法 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/html/js%E5%9F%BA%E7%A1%80.html" aria-label="js基础"><!--[--><!--]--> js基础 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><p tabindex="0" class="sidebar-item">vue <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/vue/vue3_ts_vite_electron%E7%9F%A5%E8%AF%86.html" aria-label="vue3+ts+vite知识"><!--[--><!--]--> vue3+ts+vite知识 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/vue/vue%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D.html" aria-label="vue项目介绍"><!--[--><!--]--> vue项目介绍 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/vue/vue%E7%9F%A5%E8%AF%86.html" aria-label="vue知识"><!--[--><!--]--> vue知识 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><p tabindex="0" class="sidebar-item">uniapp <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/uniapp/Dcloud%E7%94%9F%E6%80%81%E4%BA%A7%E5%93%81%E7%9A%84%E4%BD%BF%E7%94%A8.html" aria-label="Dcloud生态产品的使用"><!--[--><!--]--> Dcloud生态产品的使用 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/uniapp/uniapp%E4%BD%BF%E7%94%A8renderjs.html" aria-label="uniapp使用renderjs"><!--[--><!--]--> uniapp使用renderjs <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/uniapp/uniapp%E5%8E%9F%E7%94%9F%E9%97%AE%E9%A2%98.html" aria-label="uniapp原生问题处理"><!--[--><!--]--> uniapp原生问题处理 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/uniapp/uniapp%E5%9C%A8%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%89%93%E5%BC%80pdf%E6%96%87%E4%BB%B6.html" aria-label="uniapp项目在移动端打开Pdf文件"><!--[--><!--]--> uniapp项目在移动端打开Pdf文件 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><p tabindex="0" class="sidebar-item">微信小程序 <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%B8%AA%E4%BA%BA%E5%B7%A5%E5%85%B7%E7%AE%B1.html" aria-label="个人超级工具箱"><!--[--><!--]--> 个人超级工具箱 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><p tabindex="0" class="sidebar-item">第三方库 <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/Cordova.html" aria-label="Cordova文档"><!--[--><!--]--> Cordova文档 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/elementui%E4%BD%BF%E7%94%A8.html" aria-label="elementui 使用"><!--[--><!--]--> elementui 使用 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/highcharts.html" aria-label="highcharts"><!--[--><!--]--> highcharts <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/nuxt%E7%9F%A5%E8%AF%86.html" aria-label="nuxt知识"><!--[--><!--]--> nuxt知识 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/uniapp%E5%89%8D%E7%AB%AF%E4%BD%BF%E7%94%A8uQRCode%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%B8%A6%E6%96%87%E5%AD%97.html" aria-label="uniapp前端使用uQRCode生成二维码带文字的图片"><!--[--><!--]--> uniapp前端使用uQRCode生成二维码带文字的图片 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/vant%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98.html" aria-label="vant组件使用遇到的问题"><!--[--><!--]--> vant组件使用遇到的问题 <!--[--><!--]--></a><!----></li><!--]--></ul></li><li><p tabindex="0" class="sidebar-item active">UniCloud <!----></p><ul style="" class="sidebar-item-children"><!--[--><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/20210823%E6%96%B0%E5%A2%9E.html" aria-label="20210823新增"><!--[--><!--]--> 20210823新增 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3.html" aria-label="查询文档"><!--[--><!--]--> 查询文档 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E6%9B%B4%E6%96%B0%E6%96%87%E6%A1%A3.html" aria-label="更新文档"><!--[--><!--]--> 更新文档 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3.html" aria-label="删除文档"><!--[--><!--]--> 删除文档 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E4%BD%BF%E7%94%A8UniCloud%E6%80%BB%E7%BB%93.html" aria-label="使用UniCloud总结"><!--[--><!--]--> 使用UniCloud总结 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item active" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E7%AC%A6.html" aria-label="数据库操作符"><!--[--><!--]--> 数据库操作符 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/%E6%96%B0%E5%A2%9E%E6%96%87%E6%A1%A3.html" aria-label="新增文档"><!--[--><!--]--> 新增文档 <!--[--><!--]--></a><!----></li><li><a class="route-link sidebar-item" href="/webAccumulation/markdown/%E5%89%8D%E7%AB%AF/UniCloud/unicloud%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E6%89%98%E7%AE%A1.html" aria-label="unicloud前端网页托管"><!--[--><!--]--> unicloud前端网页托管 <!--[--><!--]--></a><!----></li><!--]--></ul></li><!--]--></ul></li><!--]--></ul><!--[--><!--]--></aside><!--]--><!--[--><main class="page"><!--[--><!--]--><div class="theme-default-content"><!--[--><!--]--><div><h1 id="数据库操作符" tabindex="-1"><a class="header-anchor" href="#数据库操作符"><span>数据库操作符</span></a></h1><h2 id="一、查询·逻辑操作符" tabindex="-1"><a class="header-anchor" href="#一、查询·逻辑操作符"><span>一、查询·逻辑操作符</span></a></h2><table><thead><tr><th>名称</th><th>说明</th></tr></thead><tbody><tr><td>and</td><td>查询操作符，用于表示逻辑 &quot;与&quot; 的关系，表示需同时满足多个查询筛选条件</td></tr><tr><td>or</td><td>查询操作符，用于表示逻辑 &quot;或&quot; 的关系，表示需同时满足多个查询筛选条件。或指令有两种用法，一是可以进行字段值的 “或” 操作，二是也可以进行跨字段的 “或” 操作。</td></tr><tr><td>not</td><td>查询操作符，用于表示逻辑 &quot;非&quot; 的关系，表示需不满足指定的条件。</td></tr><tr><td>nor</td><td>查询操作符，用于表示逻辑 &quot;都不&quot; 的关系，表示需不满足指定的所有条件。如果记录中没有对应的字段，则默认满足条件。</td></tr></tbody></table><h3 id="_1-and" tabindex="-1"><a class="header-anchor" href="#_1-and"><span>1.and</span></a></h3><p>查询操作符，用于表示逻辑 &quot;与&quot; 的关系，表示需同时满足多个查询筛选条件</p><p>使用说明 <code>and</code> 有两种使用情况：</p><ul><li><ol><li>用在根查询条件</li></ol><p>此时需传入多个查询条件，表示需同时满足提供的多个完整查询条件</p></li></ul><details><summary style="font-weight:bold;">示例 1</summary><pre>	<code>
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where(dbCmd.and([
+	  {
+	    progress: dbCmd.gt(50)
+	  },
+	  {
+	    tags: &#39;cloud&#39;
+	  }
+	])).get()
+	但以上用 and 组成的查询条件是不必要的，因为传入的对象的各字段隐式组成了 “与” 的关系，上述条件等价于下方更简洁的写法：
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.gt(50),
+	  tags: &#39;cloud&#39;
+	}).get()
+	通常需要显示使用 `and` 是用在有跨字段或操作的时候
+	</code>
+	</pre></details><ul><li><ol start="2"><li>用在字段查询条件</li></ol><p>需传入多个查询操作符或常量，表示字段需满足或匹配给定的条件。</p></li></ul><details><summary style="font-weight:bold;">示例 2</summary><pre>	<code>
+	//如以下用前置写法的方式表示 &quot;progress 字段值大于 50 且小于 100&quot;
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.and(dbCmd.gt(50), dbCmd.lt(100))
+	}).get()
+	//还可以用后置写法的方式表示同样的条件：
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.gt(50).and(dbCmd.lt(100))
+	}).get()
+	注意 Command 默认也可以直接链式调用其他 Command，默认表示多个 Command 的与操作，因此上述代码还可以精简为：
+	//
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.gt(50).lt(100)
+	}).get()
+	</code>
+	</pre></details><p>调用风格 方法接收两种传参方式，一是传入一个数组参数，二是传入多个参数，效果一样。</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>// 传入数组
+function and(expressions: Expression[]): Command
+// 传入多参数
+function and(...expressions: Expression[]): Command
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-or" tabindex="-1"><a class="header-anchor" href="#_2-or"><span>2.or</span></a></h3><p>查询操作符，用于表示逻辑 &quot;或&quot; 的关系，表示需同时满足多个查询筛选条件。或指令有两种用法，一是可以进行字段值的 “或” 操作，二是也可以进行跨字段的 “或” 操作。</p><ul><li><p>字段值的或操作</p><p>字段值的 “或” 操作指的是指定一个字段值为多个值之一即可。</p></li></ul><details><summary style="font-weight:bold;">示例 1:如筛选出进度大于 80 或小于 20 的 todo</summary><pre>	<code>
+	流式写法：
+	let res = await const dbCmd = db.command
+	db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.gt(80).or(dbCmd.lt(20))
+	}).get()
+	前置写法：
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.or(dbCmd.gt(80), dbCmd.lt(20))
+	}).get()
+	前置写法也可接收一个数组：
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.or([dbCmd.gt(80), dbCmd.lt(20)])
+	}).get()
+	</code>
+	</pre></details><ul><li><p>跨字段的或操作</p><p>跨字段的 “或” 操作指条件 “或”，相当于可以传入多个 where 语句，满足其中一个即可。</p></li></ul><details><summary style="font-weight:bold;">示例 1:如筛选出进度大于 80 或已标为已完成的 todo：</summary><pre>	<code>
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where(dbCmd.or([
+	  {
+	    progress: dbCmd.gt(80)
+	  },
+	  {
+	    done: true
+	  }
+	])).get()
+	</code>
+	</pre></details><p>调用风格 方法接收两种传参方式，一是传入一个数组参数，二是传入多个参数，效果一样。</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>// 传入数组
+function or(expressions: Expression[]): Command
+// 传入多参数
+function or(...expressions: Expression[]): Command
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-not" tabindex="-1"><a class="header-anchor" href="#_3-not"><span>3.not</span></a></h3><p>查询操作符，用于表示逻辑 &quot;非&quot; 的关系，表示需不满足指定的条件。</p><blockquote><p>示例</p></blockquote><details><summary style="font-weight:bold;">示例 1:如筛选出进度不等于100的 todo：</summary><pre>	<code>
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.not(dbCmd.eq(100))
+	}).get()
+	//not 也可搭配其他逻辑指令使用，包括 and, or, nor, not，如 or：
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.not(dbCmd.or([dbCmd.lt(50), dbCmd.eq(100)]))
+	}).get()
+	</code>
+	</pre></details><h3 id="_4-nor" tabindex="-1"><a class="header-anchor" href="#_4-nor"><span>4.nor</span></a></h3><p>查询操作符，用于表示逻辑 &quot;都不&quot; 的关系，表示需不满足指定的所有条件。如果记录中没有对应的字段，则默认满足条件。</p><blockquote><p>示例</p></blockquote><details><summary style="font-weight:bold;">示例 1:筛选出进度既不小于20又不大于80的 todo ：</summary><pre>	<code>
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.nor([dbCmd.lt(20), dbCmd.gt(80)])
+	}).get()
+	//以上同时会筛选出不存在 progress 字段的记录，如果要要求 progress 字段存在，可以用 exists 指令：
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where({
+	  progress: dbCmd.exists().nor([dbCmd.lt(20), dbCmd.gt(80)])
+	  // 等价于以下非链式调用的写法：
+	  // progress: dbCmd.exists().and(dbCmd.nor([dbCmd.lt(20), dbCmd.gt(80)]))
+	}).get()
+	</code>
+	</pre></details><details><summary style="font-weight:bold;">示例 2:筛选出 progress 不小于 20 且 tags 数组不包含 miniprogram 字符串的记录：</summary><pre>	<code>
+	const dbCmd = db.command
+	db.collection(&#39;todo&#39;).where(dbCmd.nor([{
+	  progress: dbCmd.lt(20),
+	}, {
+	  tags: &#39;miniprogram&#39;,
+	}])).get()
+	//以上会筛选出满足以下条件之一的记录：
+	progress 不小于 20 且 tags 数组不包含 miniprogram 字符串 3. progress 不小于 20 且 tags 字段不存在 5. progress 字段不存在 且 tags 数组不包含 miniprogram 字符串 7. progress 不小于 20 且 tags 字段不存在 如果要求 progress 和 tags 字段存在，可以用 exists 指令：
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todo&#39;).where(
+	  dbCmd.nor([{
+	    progress: dbCmd.lt(20),
+	  }, {
+	    tags: &#39;miniprogram&#39;,
+	  }])
+	  .and({
+	    progress: dbCmd.exists(true),
+	    tags: dbCmd.exists(true),
+	  })
+	).get()
+	</code>
+	</pre></details><p>调用风格...</p><h2 id="二、查询·比较操作符" tabindex="-1"><a class="header-anchor" href="#二、查询·比较操作符"><span>二、查询·比较操作符</span></a></h2><table><thead><tr><th>名称</th><th>说明</th></tr></thead><tbody><tr><td>eq</td><td>查询筛选条件，表示字段等于某个值。<code>eq</code> 指令接受一个字面量 (literal)，可以是 <code>number</code>, <code>boolean</code>,<code> string,</code> <code>object</code>, <code>array</code>, <code>Date</code>。</td></tr><tr><td>neq</td><td>查询筛选条件，表示字段不等于某个值。eq 指令接受一个字面量 (literal)，可以是 number, boolean, string, object, array, Date。</td></tr><tr><td>lt</td><td>查询筛选操作符，表示需小于指定值。可以传入 Date 对象用于进行日期比较</td></tr><tr><td>lte</td><td>查询筛选操作符，表示需小于或等于指定值。可以传入 Date 对象用于进行日期比较。</td></tr><tr><td>gt</td><td>查询筛选操作符，表示需大于指定值。可以传入 Date 对象用于进行日期比较。</td></tr><tr><td>gte</td><td>查询筛选操作符，表示需大于或等于指定值。可以传入 Date 对象用于进行日期比较。</td></tr><tr><td>in</td><td>查询筛选操作符，表示要求值在给定的数组内。</td></tr><tr><td>nin</td><td>查询筛选操作符，表示要求值不在给定的数组内。</td></tr></tbody></table><h3 id="_1-eq" tabindex="-1"><a class="header-anchor" href="#_1-eq"><span>1.eq</span></a></h3><p>查询筛选条件，表示字段等于某个值。<code>eq</code> 指令接受一个字面量 (literal)，可以是 <code>number</code>, <code>boolean</code>,<code> string,</code> <code>object</code>, <code>array</code>, <code>Date</code>。</p><p>比如筛选出所有自己发表的文章，除了用传对象的方式：</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const openID = &#39;xxx&#39;
+let res = await db.collection(&#39;articles&#39;).where({
+  _openid: openID
+}).get()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>还可以用指令：</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+const openID = &#39;xxx&#39;
+let res = await db.collection(&#39;articles&#39;).where({
+  _openid: dbCmd.eq(openid)
+}).get()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>注意 <code>eq</code> 指令比对象的方式有更大的灵活性，可以用于表示字段等于某个对象的情况，比如：</p><details><summary style="font-weight:bold;">示例 1:</summary><pre>	<code>
+	// 这种写法表示匹配 stat.publishYear == 2018 且 stat.language == &#39;zh-CN&#39;
+	let res = await db.collection(&#39;articles&#39;).where({
+	  stat: {
+	    publishYear: 2018,
+	    language: &#39;zh-CN&#39;
+	  }
+	}).get()
+	// 这种写法表示 stat 对象等于 { publishYear: 2018, language: &#39;zh-CN&#39; }
+	const dbCmd = db.command
+	let res = await db.collection(&#39;articles&#39;).where({
+	  stat: dbCmd.eq({
+	    publishYear: 2018,
+	    language: &#39;zh-CN&#39;
+	  })
+	}).get()
+	</code>
+	</pre></details><h3 id="_2-neq" tabindex="-1"><a class="header-anchor" href="#_2-neq"><span>2.neq</span></a></h3><p>查询筛选条件，表示字段不等于某个值。<code>eq</code> 指令接受一个字面量 (literal)，可以是 <code>number</code>, <code>boolean</code>, <code>string</code>, <code>object</code>, <code>array</code>, <code>Date</code>。</p><p>表示字段不等于某个值，和 eq 相反</p><h3 id="_3-lt" tabindex="-1"><a class="header-anchor" href="#_3-lt"><span>3.lt</span></a></h3><p>查询筛选操作符，表示需小于指定值。可以传入 <code>Date</code> 对象用于进行日期比较。</p><p>找出进度小于 50 的 todo:</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).where({
+  progress: dbCmd.lt(50)
+})
+.get({
+  success: console.log,
+  fail: console.error
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_4-lte" tabindex="-1"><a class="header-anchor" href="#_4-lte"><span>4.lte</span></a></h3><p>查询筛选操作符，表示需小于或等于指定值。可以传入 <code>Date</code> 对象用于进行日期比较。</p><p>找出进度小于或等于 50 的 todo</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).where({
+  progress: dbCmd.lte(50)
+})
+.get({
+  success: console.log,
+  fail: console.error
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_5-gt" tabindex="-1"><a class="header-anchor" href="#_5-gt"><span>5.gt</span></a></h3><p>查询筛选操作符，表示需大于指定值。可以传入 Date 对象用于进行日期比较。</p><p>找出进度大于 50 的 todo</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).where({
+  progress: dbCmd.gt(50)
+})
+.get({
+  success: console.log,
+  fail: console.error
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_6-gte" tabindex="-1"><a class="header-anchor" href="#_6-gte"><span>6.gte</span></a></h3><p>查询筛选操作符，表示需大于或等于指定值。可以传入 Date 对象用于进行日期比较。</p><p>找出进度大于或等于 50 的 todo</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).where({
+  progress: dbCmd.gte(50)
+})
+.get({
+  success: console.log,
+  fail: console.error
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_7-in" tabindex="-1"><a class="header-anchor" href="#_7-in"><span>7.in</span></a></h3><p>查询筛选操作符，表示要求值在给定的数组内。</p><p>找出进度为 0 或 100 的 todo</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).where({
+  progress: dbCmd.in([0, 100])
+})
+.get({
+  success: console.log,
+  fail: console.error
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_8-nin" tabindex="-1"><a class="header-anchor" href="#_8-nin"><span>8.nin</span></a></h3><p>查询筛选操作符，表示要求值不在给定的数组内。</p><p>找出进度不是 0 或 100 的 todo</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).where({
+  progress: dbCmd.nin([0, 100])
+})
+.get({
+  success: console.log,
+  fail: console.error
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="三、查询·字段操作符" tabindex="-1"><a class="header-anchor" href="#三、查询·字段操作符"><span>三、查询·字段操作符</span></a></h2><h3 id="_1-exists" tabindex="-1"><a class="header-anchor" href="#_1-exists"><span>1.exists</span></a></h3><p>判断字段是否存在</p><p>找出存在 tags 字段的记录</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).where({
+  tags: dbCmd.exists(true)
+})
+.get()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-mod" tabindex="-1"><a class="header-anchor" href="#_2-mod"><span>2.mod</span></a></h3><p>查询筛选操作符，给定除数 divisor 和余数 remainder，要求字段作为被除数时 value % divisor = remainder。</p><p>找出进度为 10 的倍数的字段的记录</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).where({
+  progress: dbCmd.mod(10, 0)
+})
+.get()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="四、查询·数组操作符" tabindex="-1"><a class="header-anchor" href="#四、查询·数组操作符"><span>四、查询·数组操作符</span></a></h2><h3 id="_1-all" tabindex="-1"><a class="header-anchor" href="#_1-all"><span>1.all</span></a></h3><p>数组查询操作符。用于数组字段的查询筛选条件，要求数组字段中包含给定数组的所有元素。</p><ul><li>示例代码 1：普通数组</li></ul><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>找出 tags 数组字段同时包含 cloud 和 database 的记录
+const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).where({
+  tags: dbCmd.all([&#39;cloud&#39;, &#39;database&#39;])
+})
+.get()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>示例代码 2：对象数组 //如果数组元素是对象，则可以用 dbCmd.elemMatch 匹配对象的部分字段</li></ul><details><summary style="font-weight:bold;">示例 1:</summary><pre>	<code>
+	//假设有字段 places 定义如下：
+	{
+	  &quot;type&quot;: string
+	  &quot;area&quot;: number
+	  &quot;age&quot;: number
+	}
+	//找出数组字段中至少同时包含一个满足 “area 大于 100 且 age 小于 2” 的元素和一个满足 “type 为 mall 且 age 大于 5” 的元素
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).where({
+	  places: dbCmd.all([
+	    dbCmd.elemMatch({
+	      area: dbCmd.gt(100),
+	      age: dbCmd.lt(2),
+	    }),
+	    dbCmd.elemMatch({
+	      type: &#39;mall&#39;,
+	      age: dbCmd.gt(5),
+	    }),
+	  ]),
+	})
+	.get()
+	</code>
+</pre></details><h3 id="_2-elemmatch" tabindex="-1"><a class="header-anchor" href="#_2-elemmatch"><span>2.elemMatch</span></a></h3><p>用于数组字段的查询筛选条件，要求数组中包含至少一个满足 <code>elemMatch</code> 给定的所有条件的元素</p><details><summary style="font-weight:bold;">示例 1:数组是对象数组的情况</summary><pre>	<code>
+	//假设集合示例数据如下：
+	{
+	  &quot;_id&quot;: &quot;a0&quot;,
+	  &quot;city&quot;: &quot;x0&quot;,
+	  &quot;places&quot;: [{
+	    &quot;type&quot;: &quot;garden&quot;,
+	    &quot;area&quot;: 300,
+	    &quot;age&quot;: 1
+	  }, {
+	    &quot;type&quot;: &quot;theatre&quot;,
+	    &quot;area&quot;: 50,
+	    &quot;age&quot;: 15
+	  }]
+	}
+	//找出 places 数组字段中至少同时包含一个满足 “area 大于 100 且 age 小于 2” 的元素
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).where({
+	  places: dbCmd.elemMatch({
+	    area: dbCmd.gt(100),
+	    age: dbCmd.lt(2),
+	  })
+	})
+	.get()
+	注意*：如果不使用 elemMatch 而直接如下指定条件，则表示的是 places 数组字段中至少有一个元素的 area 字段大于 100 且 places 数组字段中至少有一个元素的 age 字段小于 2：
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).where({
+	  places: {
+	    area: dbCmd.gt(100),
+	    age: dbCmd.lt(2),
+	  }
+	})
+	.get()
+	</code>
+</pre></details><details><summary style="font-weight:bold;">示例 2:数组元素都是普通数据类型的情况</summary><pre>	<code>
+	//假设集合示例数据如下：
+	{
+	  &quot;_id&quot;: &quot;a0&quot;,
+	  &quot;scores&quot;: [60, 80, 90]
+	}
+	//找出 scores 数组字段中至少同时包含一个满足 “大于 80 且小于 100” 的元素
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).where({
+	  scores: dbCmd.elemMatch(dbCmd.gt(80).lt(100))
+	})
+	.get()
+	</code>
+</pre></details><h3 id="_3-size" tabindex="-1"><a class="header-anchor" href="#_3-size"><span>3.size</span></a></h3><p>更新操作符，用于数组字段的查询筛选条件，要求数组长度为给定值</p><p>找出 tags 数组字段长度为 2 的所有记录</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).where({
+  places: dbCmd.size(2)
+})
+.get()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="五、查询·地理位置操作符" tabindex="-1"><a class="header-anchor" href="#五、查询·地理位置操作符"><span>五、查询·地理位置操作符</span></a></h2><h3 id="_1-geonear" tabindex="-1"><a class="header-anchor" href="#_1-geonear"><span>1.geoNear</span></a></h3><p>按从近到远的顺序，找出字段值在给定点的附近的记录。</p><p>索引要求 需对查询字段建立地理位置索引</p><p>找出离给定位置 1 公里到 5 公里范围内的记录</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;restaurants&#39;).where({
+  location: dbCmd.geoNear({
+    geometry: new db.Geo.Point(113.323809, 23.097732),
+    minDistance: 1000,
+    maxDistance: 5000,
+  })
+}).get()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-geowithin" tabindex="-1"><a class="header-anchor" href="#_2-geowithin"><span>2.geoWithin</span></a></h3><p>找出字段值在指定区域内的记录，无排序。指定的区域必须是多边形（Polygon）或多边形集合（MultiPolygon）。</p><p>索引要求 需对查询字段建立地理位置索引</p><details><summary style="font-weight:bold;">示例 1:给定多边形</summary><pre>	<code>
+	const dbCmd = db.command
+	const { Point, LineString, Polygon } = db.Geo
+	let res = await .collection(&#39;restaurants&#39;).where({
+	  location: dbCmd.geoWithin({
+	    geometry: new Polygon([
+	      new LineString([
+	        new Point(0, 0),
+	        new Point(3, 2),
+	        new Point(2, 3),
+	        new Point(0, 0)
+	      ])
+	    ]),
+	  })
+	}).get()
+	</code>
+</pre></details><blockquote><p>给定圆形</p></blockquote><p>可以不用 <code>geometry</code> 而用 <code>centerSphere</code> 构建一个圆形。</p><p><code>centerSphere</code> 对应的值的定义是：<code>[ [经度, 纬度], 半径 ]</code></p><p>半径需以弧度计，比如需要 10km 的半径，则用距离除以地球半径 6378.1km 得出的数字。</p><details><summary style="font-weight:bold;">示例 2:给定圆形</summary><pre>	<code>
+	const dbCmd = db.command
+	const { Point, LineString, Polygon } = db.Geo
+	let res = await .collection(&#39;restaurants&#39;).where({
+	  location: dbCmd.geoWithin({
+	    geometry: new Polygon([
+	      new LineString([
+	        new Point(0, 0),
+	        new Point(3, 2),
+	        new Point(2, 3),
+	        new Point(0, 0)
+	      ])
+	    ]),
+	  })
+	}).get()
+	</code>
+</pre></details><h3 id="_3-geointersects" tabindex="-1"><a class="header-anchor" href="#_3-geointersects"><span>3.geoIntersects</span></a></h3><p>找出给定的地理位置图形相交的记录</p><p>索引要求 需对查询字段建立地理位置索引</p><p>找出和一个多边形相交的记录:</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+const { Point, LineString, Polygon } = db.Geo
+let res = await db.collection(&#39;restaurants&#39;).where({
+  location: dbCmd.geoIntersects({
+    geometry: new Polygon([
+      new LineString([
+        new Point(0, 0),
+        new Point(3, 2),
+        new Point(2, 3),
+        new Point(0, 0)
+      ])
+    ]),
+  })
+}).get()
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="六、查询·表达式操作符" tabindex="-1"><a class="header-anchor" href="#六、查询·表达式操作符"><span>六、查询·表达式操作符</span></a></h2><h3 id="_1-expr" tabindex="-1"><a class="header-anchor" href="#_1-expr"><span>1.expr</span></a></h3><p>查询操作符，用于在查询语句中使用聚合表达式，方法接收一个参数，该参数必须为聚合表达式</p><p>使用说明</p><ul><li>expr 可用于在聚合 match 流水线阶段中引入聚合表达式 3. 如果聚合 match 阶段是在 lookup 阶段内，此时的 expr 表达式内可使用 lookup 中使用 let 参数定义的变量，具体示例可见 lookup 的 指定多个连接条件 例子 5. expr 可用在普通查询语句（where）中引入聚合表达式</li></ul><details><summary style="font-weight:bold;">示例代码 1：比较同一个记录中的两个字段</summary><pre>	<code>
+	//假设 items 集合的数据结构如下：
+	{
+	  &quot;_id&quot;: string,
+	  &quot;inStock&quot;: number, // 库存量
+	  &quot;ordered&quot;: number  // 被订量
+	}
+	//找出被订量大于库存量的记录：
+	const dbCmd = db.command
+	const $ = dbCmd.aggregate
+	let res = await db.collection(&#39;items&#39;).where(dbCmd.expr($.gt(&#39;$ordered&#39;, &#39;$inStock&#39;))).get()
+	</code>
+</pre></details><details><summary style="font-weight:bold;">示例代码 2：与条件语句组合使用</summary><pre>	<code>
+	假设 items 集合的数据结构如下：
+	{
+	  &quot;_id&quot;: string,
+	  &quot;price&quot;: number
+	}
+	假设加个小于等于 10 的打 8 折，大于 10 的打 5 折，让数据库查询返回打折后价格小于等于 8 的记录：
+	const dbCmd = db.command
+	const $ = dbCmd.aggregate
+	let res = await db.collection(&#39;items&#39;).where(dbCmd.expr(
+	  $.lt(
+	    $.cond({
+	      if: $.gte(&#39;$price&#39;, 10),
+	      then: $.multiply([&#39;$price&#39;, &#39;0.5&#39;]),
+	      else: $.multiply([&#39;$price&#39;, &#39;0.8&#39;]),
+	    })
+	    ,
+	    8
+	  )
+	).get()
+	</code>
+</pre></details><h2 id="七、更新·字段操作符" tabindex="-1"><a class="header-anchor" href="#七、更新·字段操作符"><span>七、更新·字段操作符</span></a></h2><table><thead><tr><th>名称</th><th>说明</th></tr></thead><tbody><tr><td>set</td><td>更新操作符，用于设定字段等于指定值。</td></tr><tr><td>remove</td><td>更新操作符，用于表示删除某个字段。</td></tr><tr><td>inc</td><td>更新操作符，原子操作，用于指示字段自增</td></tr><tr><td>mul</td><td>更新操作符，原子操作，用于指示字段自乘某个值</td></tr><tr><td>min</td><td>更新操作符，给定一个值，只有该值小于字段当前值才进行更新。</td></tr><tr><td>max</td><td>更新操作符，给定一个值，只有该值大于字段当前值才进行更新。</td></tr><tr><td>rename</td><td>更新操作符，字段重命名。如果需要对嵌套深层的字段做重命名，需要用点路径表示法。不能对嵌套在数组里的对象的字段进行重命名。</td></tr></tbody></table><h3 id="_1-set" tabindex="-1"><a class="header-anchor" href="#_1-set"><span>1.set</span></a></h3><p>更新操作符，用于设定字段等于指定值。</p><p>使用说明 这种方法相比传入纯 JS 对象的好处是能够指定字段等于一个对象</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>// 以下方法只会更新 style.color 为 red，而不是将 style 更新为 { color: &#39;red&#39; }，即不影响 style 中的其他字段
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  style: {
+    color: &#39;red&#39;
+  }
+})
+
+// 以下方法更新 style 为 { color: &#39;red&#39;, size: &#39;large&#39; }
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  style: dbCmd.set({
+    color: &#39;red&#39;,
+    size: &#39;large&#39;
+  })
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-remove" tabindex="-1"><a class="header-anchor" href="#_2-remove"><span>2.remove</span></a></h3><p>更新操作符，用于表示删除某个字段。</p><p>删除 style 字段：</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;todo-id&#39;).update({
+  style: dbCmd.remove()
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-inc" tabindex="-1"><a class="header-anchor" href="#_3-inc"><span>3.inc</span></a></h3><p>更新操作符，原子操作，用于指示字段自增</p><p>原子自增 多个用户同时写，对数据库来说都是将字段自增，不会有后来者覆写前者的情况</p><p>将一个 todo 的进度自增 10：</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;todo-id&#39;).update({
+  progress: dbCmd.inc(10)
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_4-mul" tabindex="-1"><a class="header-anchor" href="#_4-mul"><span>4.mul</span></a></h3><p>更新操作符，原子操作，用于指示字段自乘某个值</p><p>原子自乘 多个用户同时写，对数据库来说都是将字段自乘，不会有后来者覆写前者的情况</p><p>将一个 todo 的进度自乘 10：</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;todo-id&#39;).update({
+  progress: dbCmd.mul(10)
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_5-min" tabindex="-1"><a class="header-anchor" href="#_5-min"><span>5.min</span></a></h3><p>更新操作符，给定一个值，只有该值小于字段当前值才进行更新。</p><p>如果字段 progress &gt; 50，则更新到 50</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  progress: dbCmd.min(50)
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_6-max" tabindex="-1"><a class="header-anchor" href="#_6-max"><span>6.max</span></a></h3><p>更新操作符，给定一个值，只有该值大于字段当前值才进行更新。</p><p>如果字段 progress &lt; 50，则更新到 50</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  progress: dbCmd.max(50)
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_7-rename" tabindex="-1"><a class="header-anchor" href="#_7-rename"><span>7.rename</span></a></h3><p>更新操作符，字段重命名。如果需要对嵌套深层的字段做重命名，需要用点路径表示法。不能对嵌套在数组里的对象的字段进行重命名。</p><p>示例 1：重命名顶层字段</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  progress: dbCmd.rename(&#39;totalProgress&#39;)
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>示例 2：重命名嵌套字段</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  someObject: {
+    someField: dbCmd.rename(&#39;someObject.renamedField&#39;)
+  }
+})
+或：
+const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  &#39;someObject.someField&#39;: dbCmd.rename(&#39;someObject.renamedField&#39;)
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="八、更新·数组操作符" tabindex="-1"><a class="header-anchor" href="#八、更新·数组操作符"><span>八、更新·数组操作符</span></a></h2><table><thead><tr><th>名称</th><th>说明</th></tr></thead><tbody><tr><td>push</td><td>数组更新操作符。对一个值为数组的字段，往数组添加一个或多个值。或字段原为空，则创建该字段并设数组为传入值。</td></tr><tr><td>pop</td><td>数组更新操作符，对一个值为数组的字段，将数组尾部元素删除，仅可以删除末尾一个</td></tr><tr><td>unshift</td><td>数组更新操作符，对一个值为数组的字段，往数组头部添加一个或多个值。或字段原为空，则创建该字段并设数组为传入值。</td></tr><tr><td>shift</td><td>数组更新操作符，对一个值为数组的字段，将数组头部元素删除。</td></tr><tr><td>pull</td><td>数组更新操作符。给定一个值或一个查询条件，将数组中所有匹配给定值或查询条件的元素都移除掉。</td></tr><tr><td>pullAll</td><td>数组更新操作符。给定一个值或一个查询条件，将数组中所有匹配给定值的元素都移除掉。跟 pull 的差别在于只能指定常量值、传入的是数组。</td></tr><tr><td>addToSet</td><td>数组更新操作符。原子操作。给定一个或多个元素，除非数组中已存在该元素，否则添加进数组。</td></tr></tbody></table><h3 id="_1-push" tabindex="-1"><a class="header-anchor" href="#_1-push"><span>1.push</span></a></h3><p>数组更新操作符。对一个值为数组的字段，往数组添加一个或多个值。或字段原为空，则创建该字段并设数组为传入值。</p><p>参数说明</p><ul><li><p>position 说明</p><p>要求必须同时有 each 参数存在。</p><p>非负数代表从数组开始位置数的位置，从 0 开始计。如果数值大于等于数组长度，则视为在尾部添加。负数代表从数组尾部倒数的位置，比如 -1 就代表倒数第二个元素的位置。如果负数数值的绝对值大于等于数组长度，则视为从数组头部添加。</p></li><li><p>sort 说明</p><p>要求必须同时有 each 参数存在。给定 1 代表升序，-1 代表降序。</p><p>如果数组元素是记录，则用 { &lt;字段&gt;: 1 | -1 } 的格式表示根据记录中的什么字段做升降序排序。</p></li><li><p>slice 说明**</p><p>要求必须同时有 each 参数存在 |值 |说明 | |------|------| |0 |将字段更新为空数组 | |正数 |数组只保留前 n 个元素 | |负数 |数组只保留后 n 个元素 |</p></li></ul><details><summary style="font-weight:bold;">示例代码 1：尾部添加元素</summary><pre>	<code>
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.push([&#39;mini-program&#39;, &#39;cloud&#39;])
+	})
+	</code>
+</pre></details><details><summary style="font-weight:bold;">示例代码 2：从第二个位置开始插入</summary><pre>	<code>
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.push({
+	    each: [&#39;mini-program&#39;, &#39;cloud&#39;],
+	    position: 1,
+	  })
+	})
+	</code>
+</pre></details><details><summary style="font-weight:bold;">示例代码 3：排序</summary><pre>	<code>
+	//插入后对整个数组做排序
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.push({
+	    each: [&#39;mini-program&#39;, &#39;cloud&#39;],
+	    sort: 1,
+	  })
+	})
+	//不插入，只对数组做排序
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.push({
+	    each: [],
+	    sort: 1,
+	  })
+	})
+	//如果字段是对象数组，可以如下根据元素对象里的字段进行排序：
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.push({
+	    each: [
+	      { name: &#39;miniprogram&#39;, weight: 8 },
+	      { name: &#39;cloud&#39;, weight: 6 },
+	    ],
+	    sort: {
+	      weight: 1,
+	    },
+	  })
+	})
+	</code>
+</pre></details><details><summary style="font-weight:bold;">示例代码 4：截断保留</summary><pre>	<code>
+	//插入后只保留后 2 个元素
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.push({
+	    each: [&#39;mini-program&#39;, &#39;cloud&#39;],
+	    slice: -2,
+	  })
+	})
+	</code>
+</pre></details><details><summary style="font-weight:bold;">示例代码 5：在指定位置插入、然后排序、最后只保留前 2 个元素</summary><pre>	<code>
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.push({
+	    each: [&#39;mini-program&#39;, &#39;cloud&#39;],
+	    position: 1,
+	    slice: 2,
+	    sort: 1,
+	  })
+	})
+	</code>
+</pre></details><h3 id="_2-pop" tabindex="-1"><a class="header-anchor" href="#_2-pop"><span>2.pop</span></a></h3><p>数组更新操作符，对一个值为数组的字段，将数组尾部元素删除，仅可以删除末尾一个</p><p>示例代码</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  tags: dbCmd.pop()
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-unshift" tabindex="-1"><a class="header-anchor" href="#_3-unshift"><span>3.unshift</span></a></h3><p>数组更新操作符，对一个值为数组的字段，往数组头部添加一个或多个值。或字段原为空，则创建该字段并设数组为传入值。</p><p>示例代码</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  tags: dbCmd.unshift([&#39;mini-program&#39;, &#39;cloud&#39;])
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_4-shift" tabindex="-1"><a class="header-anchor" href="#_4-shift"><span>4.shift</span></a></h3><p>数组更新操作符，对一个值为数组的字段，将数组头部元素删除。</p><p>示例代码</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  tags: dbCmd.shift()
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_5-pull" tabindex="-1"><a class="header-anchor" href="#_5-pull"><span>5.pull</span></a></h3><p>数组更新操作符。给定一个值或一个查询条件，将数组中所有匹配给定值或查询条件的元素都移除掉。</p><details><summary style="font-weight:bold;">示例代码 1：根据常量匹配移除</summary><pre>	<code>
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.pull(&#39;database&#39;)
+	})
+	</code>
+</pre></details><details><summary style="font-weight:bold;">示例代码 2：根据查询条件匹配移除</summary><pre>	<code>
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.pull(dbCmd.in([&#39;database&#39;, &#39;cloud&#39;]))
+	})
+	</code>
+</pre></details><details><summary style="font-weight:bold;">示例代码 3：对象数组时，根据查询条件匹配移除</summary><pre>	<code>
+	假设有字段 places 数组中的元素结构如下
+	{
+	  &quot;type&quot;: string
+	  &quot;area&quot;: number
+	  &quot;age&quot;: number
+	}
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  places: dbCmd.pull({
+	    area: dbCmd.gt(100),
+	    age: dbCmd.lt(2),
+	  })
+	})
+	</code>
+</pre></details><details><summary style="font-weight:bold;">示例代码 4：有嵌套对象的对象数组时，根据查询条件匹配移除</summary><pre>	<code>
+	//假设有字段 cities 数组中的元素结构如下
+	{
+	  &quot;name&quot;: string
+	  &quot;places&quot;: Place[]
+	}
+	//Place 结构如下：
+	{
+	  &quot;type&quot;: string
+	  &quot;area&quot;: number
+	  &quot;age&quot;: number
+	}
+	//可用 elemMatch 匹配嵌套在对象数组里面的对象数组字段 places
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  cities: dbCmd.pull({
+	    places: dbCmd.elemMatch({
+	      area: dbCmd.gt(100),
+	      age: dbCmd.lt(2),
+	    })
+	  })
+	})
+	</code>
+</pre></details><h3 id="_6-pullall" tabindex="-1"><a class="header-anchor" href="#_6-pullall"><span>6.pullAll</span></a></h3><p>数组更新操作符。给定一个值或一个查询条件，将数组中所有匹配给定值的元素都移除掉。跟 <code>pull</code> 的差别在于只能指定常量值、传入的是数组。</p><p>根据常量匹配移除</p><p>从 tags 中移除所有 database 和 cloud 字符串</p><div class="language-text line-numbers-mode" data-ext="text" data-title="text"><pre class="language-text"><code>const dbCmd = db.command
+let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+  tags: dbCmd.pullAll([&#39;database&#39;, &#39;cloud&#39;])
+})
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_7-addtoset" tabindex="-1"><a class="header-anchor" href="#_7-addtoset"><span>7.addToSet</span></a></h3><p>数组更新操作符。原子操作。给定一个或多个元素，除非数组中已存在该元素，否则添加进数组。</p><details><summary style="font-weight:bold;">示例代码 1：添加一个元素</summary><pre>	<code>
+	如果 tags 数组中不包含 database，添加进去
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.addToSet(&#39;database&#39;)
+	})
+	</code>
+</pre></details><details><summary style="font-weight:bold;">示例代码 1：添加多个元素</summary><pre>	<code>
+	需传入一个对象，其中有一个字段 each，其值为数组，每个元素就是要添加的元素
+	const dbCmd = db.command
+	let res = await db.collection(&#39;todos&#39;).doc(&#39;doc-id&#39;).update({
+	  tags: dbCmd.addToSet({
+	    each: [&#39;database&#39;, &#39;cloud&#39;]
+	  })
+	})
+	</code>
+</pre></details></div><!--[--><!--]--></div><footer class="page-meta"><!----><!----><!----></footer><!----><!--[--><!--]--></main><!--]--></div><!--[--><!----><!--]--><!--]--></div>
+    <script src="/webAccumulation/assets/js/runtime~app.6364d75d.js" defer></script><script src="/webAccumulation/assets/js/1587.243dee9a.js" defer></script><script src="/webAccumulation/assets/js/app.c3805aab.js" defer></script>
+  </body>
+</html>
