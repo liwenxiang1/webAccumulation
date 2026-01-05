@@ -1,0 +1,103 @@
+/* 同样布局样式 */
+.ver-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.ver-layout-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ver-layout-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ver-layout-side-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ver-layout-center-all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hor-layout {
+    display: flex;
+    flex-direction: row;
+}
+
+.hor-layout-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.hor-layout-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.hor-layout-around {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.hor-layout-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+.hor-layout-around-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.hor-layout-side-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hor-layout-center-all {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-grid-layout {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.single-line {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.app-container {
+}
+
+.list-no-data {
+    color: grey;
+    width: 100%;
+    height: 300px;
+    text-align: center;
+    line-height: 300px;
+}
