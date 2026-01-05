@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    text-decoration: none;
+    color: inherit;
+    font-weight: normal;
+    font-family: "å¾®è½¯é›…é»‘";
+    box-sizing: border-box;
+    font-style: normal;
+    outline: none;
+}
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+    background: url(images/bg.jpg) top center no-repeat #f50011;
+    background-size: 100%;
+    padding-top: 8.50rem;
+}
+
+img {
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+a:hover, a:active, a:visited, a:link, a:focus {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    text-decoration: none;
+}
+
+/*é¡¶éƒ¨æ ‡é¢˜ è¿”å›ž*/
+.top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: .88rem;
+    line-height: .88rem;
+    width: 100%;
+    text-align: center;
+    font-size: .32rem;
+    color: #fff;
+}
+
+.top i {
+    background: url(images/arrow-left.png) center left no-repeat;
+    position: absolute;
+    top: 0;
+    left: .33rem;
+    height: 100%;
+    display: inline-block;
+    background-size: .17rem .30rem;
+    width: .5rem;
+    height: 100%;
+}
+
+/*æŠ½å¥–åŒº*/
+.lottery {
+    width: 7.33rem;
+    height: 6.62rem;
+    margin: 0 auto;
+    background: url(images/zhuanpan.png) center center no-repeat;
+    background-size: 100%;
+    padding: .6rem .7rem .6rem .6rem;
+}
+
+.lottery ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.lottery ul li {
+    width: 1.94rem;
+    height: 1.7rem;
+    background: url(images/jp-bg.png) center center no-repeat;
+    background-size: 100%;
+    margin-bottom: .12rem;
+    padding: .22rem .1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.lottery ul li img {
+    width: 1.77rem;
+    height: .68rem;
+}
+
+.lottery ul li p {
+    font-size: .24rem;
+    color: #e6483c;
+    text-align: center;
+    padding-top: .15rem;
+}
+
+.lottery ul li.begin {
+    padding: 0;
+    background: url(images/btn-begin.png) center center no-repeat;
+    background-size: 100%;
+    transition: all .1s linear;
+    user-select: none;
+}
+
+.lottery ul li.begin p {
+    color: #FFFFFF;
+    font-size: .22rem;
+    padding-top: 1rem;
+}
+
+.lottery ul li.begin p span {
+    color: #fde305;
+}
+
+.lottery ul li.begin.clicked {
+    transform: scale(.9);
+    transition: all .1s linear;
+}
+
+.lottery ul li.active {
+    opacity: .6;
+}
+
+/*è§„åˆ™å¥–å“æŒ‰é’®*/
+.foot {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.foot a {
+    display: inline-block;
+    width: 2.9rem;
+    height: 1.18rem;
+    margin: .2rem .1rem;
+}
+
+.foot a.rule {
+    background: url(images/btn-rule.png) center center no-repeat;
+    background-size: 100%;
+}
+
+.foot a.goods {
+    background: url(images/btn-goods.png) center center no-repeat;
+    background-size: 100%;
+}

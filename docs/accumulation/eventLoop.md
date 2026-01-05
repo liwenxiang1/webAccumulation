@@ -1,98 +1,75 @@
 <!--
- * @Author: liwenxiang
- * @Date: 2024-03-04 20:58:21
- * @LastEditors: liwenxiang
- * @LastEditTime: 2024-03-04 21:45:41
+ * @Author: “liwx” “1258598654qq.com”
+ * @Date: 2025-04-30 18:10:42
+ * @LastEditors: “liwx” “1258598654qq.com”
+ * @LastEditTime: 2025-07-10 14:16:49
+ * @FilePath: \webAccumulation\docs\accumulation\eventLoop.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 
-# 事件循环（Event Loop）以及实例
+# 浏览器事件循环
 
-大家都知道 js 是单线程的脚本语言，在同一时间只能做同一件事，为了协调时间，用户交互，脚本，UI 渲染和网络处理等行为，为了防止线程阻塞，Event Loop 应运而生
+js 线程+浏览器其他线程+队列之间的循环组成了浏览器事件循环
 
-**为什么 js 是单线程的**
-js 是运行在浏览器的脚本语言，js 的主要用途之一是操作 dom
+## 进程和线程
 
-举个例子，如果 js 有两个线程，同时操作同一个 dom，浏览器该怎么办呢？为了避免这种情况，js 必须是单线程的
+进程：启动一个应用程序，就会默认启动一个进程
 
-## 执行栈与任务队列
+线程：每一个进程中，启动至少一个线程，用于执行程序中的代码，这个线程被称为主线程
 
-因为 js 是单线程云烟，到遇到一步任务时，不可能一直等待一步完成，再进行下一步，这期间浏览器是空闲状态，这是对资源的浪费
+**进程是线程的容器**
 
-### 执行栈（调用栈）
+浏览器是多线程的，js 线程只是其中之一。javascript 是单线程的，但是可以开启多进程。如果比较耗时的操作，不交给 js 线程，交给其他线程，其他线程执行完毕后，再告诉 js 线程，js 线程只负责执行回调函数
 
-当执行某个函数、用户点击一次数遍，ajax 完成，一个图片加载完成等时间发生时，只要指定过回调函数，这些时间发生时就会进入执行栈队列中，等待主线程读取，遵循先进后出原则
+## 浏览器的事件循环
 
-### 主线程
+![](../img/事件循环.jpg)
 
-主线程规定现在执行`执行栈`中的那个任务
+## 微任务和宏任务
 
-主线程循环：即主线程会不停地从执行栈中读取事件，执行栈中的同步代码
+**宏任务执行之前，会先执行所有的微任务**
 
-当遇到一个异步事件后，也不会一直等待一不执行的返回结果，而是会挂载到执行队列中（Task Queue）
+宏任务：ajax、 setTimeout、setInterval、setImmediate、I/O、UI rendering
+微任务：Promise.then、process.nextTick、MutationObserver、queueMicrotask
 
-**当主线程执行完执行栈中所有的代码之后，回去查看任务队列中是否有任务**。如果有，主线正会一次执行任务队列中的回调函数
+全局代码（main script）优先执行，然后检查微任务队列，执行微任务，然后检查宏任务队列，执行宏任务，然后检查微任务队列，执行微任务，然后检查宏任务队列，执行宏任务，如此往复
 
-**代码示例**
+**注意：new Promise 不是微任务，Promise.then 才是微任务。new Promise(()=> {})中的代码是直接执行的**
 
-```js
-let a = () => {
-	setTimeout(() => {
-		console.log('任务队列函数1')
-	}, 0)
-	for (let i = 0; i < 5000; i++) {
-		console.log('a的for循环')
-	}
-	console.log('a事件执行完')
-}
-let b = () => {
-	setTimeout(() => {
-		console.log('任务队列函数2')
-	}, 0)
-	for (let i = 0; i < 5000; i++) {
-		console.log('b的for循环')
-	}
-	console.log('b事件执行完')
-}
-let c = () => {
-	setTimeout(() => {
-		console.log('任务队列函数3')
-	}, 0)
-	for (let i = 0; i < 5000; i++) {
-		console.log('c的for循环')
-	}
-	console.log('c事件执行完')
-}
-a()
-b()
-c()
-// 当a、b、c函数都执行完成之后，三个setTimeout才会依次执行
-```
+面试题 1
 
-### js 异步运行机制
+![](../img/浏览器事件循环.jpg)
 
-1. 所有任务都在主线程上执行，行程一个执行栈
-2. 主线程之外还有一个“任务队列”只要一步任务有了结果，就会在“任务队列”中防止一个时间
-3. 一旦“执行栈”中所有的任务执行完毕，系统就会读取“任务队列”。那些对应的异步任务，结束等待状态，进入执行栈并开始执行
+面试题 2
 
-### 宏任务与微任务
+![](../img/面试题2.jpg)
 
-异步任务分为宏任务和微任务
+面试题 3
 
-**宏任务**
+![](../img/面试题3.jpg)
 
-script(整体代码)，setTimeout,setInterval,Ui 渲染，I/O，postMessage,MessageChannel,setImmediate
+![](../img/面试题3-1.jpg)
 
-**微任务**
+# Node 的事件循环
 
-Promise、mutationObserve、process.nextTick
+libuv 维护了一个 event loop 和 worker threads 池（线程池）
 
-### Event Loop（事件循环）
+## node 的事件循环分为 6 个阶段
 
-Event Loop 中每一次循环成为 tick,每一次 tick 的任务如下
+![](../img/node阶段.jpg)
 
-- 执行栈选择最先进入队列的宏任务（通常是`script`整体代码），如果有则执行
-- 检查是否存在微任务，如果存在则不停执行，直至清空微任务队列
-- 更新 render（每一次时间循环，浏览器都会去更新重新渲染）
-- 重复以上步骤
+经常会停留在 I/O 阶段，因为大部分异步任务都在这个阶段执行
 
-宏任务 > 所有微任务 > 宏任务
+## node 的宏任务和微任务
+
+- 宏任务：Ajax、setTimeout、setInterval、setImmediate、I/O、UI rendering、DOM 事件、关闭回调
+- 微任务：process.nextTick（优先执行）、Promise.then、MutationObserver、queueMicrotask
+
+**node 微任务和宏任务执行顺序**
+
+![](../img/node微任务和宏任务执行顺序.jpg)
+
+## node 的事件循环和浏览器的事件循环的区别
+
+1. 浏览器的事件循环是宏任务和微任务交替执行，node 的事件循环是宏任务和微任务交替执行，但是宏任务之间不是交替执行，而是顺序执行
+2. node 的事件循环是 6 个阶段，浏览器的事件循环是 2 个阶段

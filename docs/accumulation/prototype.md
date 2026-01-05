@@ -1,16 +1,36 @@
+<!--
+ * @Author: “liwx” “1258598654qq.com”
+ * @Date: 2024-08-20 16:00:29
+ * @LastEditors: “liwx” “1258598654qq.com”
+ * @LastEditTime: 2025-04-22 11:17:23
+ * @FilePath: \webAccumulation\docs\accumulation\prototype.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+
 # 原型和原型链
 
 ## 什么是原型和原型链
 
-1、显示原型：每一个类（构造函数）都有一个显示原型 prototype 对象
+1、显式原型：每一个类（构造函数）都有一个显式原型 prototype 对象。只有方法才有
 
-2、隐式原型：每一个实例都有一个隐式原型*proto*
+2、隐式原型：每一个实例都有一个隐式原型*proto*，只有对象有
 
 3、每一个函数都有 prototype,指向原型对象，prototype 的所有方法和属性，都能被通过构造函数所创建的实例继承
 
 4、prototype 对象（原型对象）有一个 constructor 属性，默认指向 prototype 对象的构造函数
 
-## 原型链继承（new）
+```js
+function foo() {}
+constructor: foo;
+```
+
+## 使用 new 创建对象后的内存表现
+
+![](../img/创建对象的原型表现.png)
+
+# 继承的方式
+
+## 1、原型链继承（new）
 
 ```js
 function fatherTn() {
@@ -71,12 +91,12 @@ sonFInstance2.say() //我是父类
 
      > 原因是：实例化父类（`sonFn.prototypr = new fatherFn()`）是一次性赋值到子类实例原型（`son.prototype`）上，他会将父类通过 `this` 声明的属性也赋值到子类的 `prototype` 上
 
-## 借用构造函数继承
+## 2、借用构造函数继承
 
 **一经调用 `call/apply` 就会立即执行函数，并在函数执行时改变 this 的指向**
 
 ```js
-fatherFn.call(this, ...args)
+fatherFn.call(this, ...args);
 ```
 
 1. 在子类中使用 call 调用父类，fatherFn 将会被立即执行，并将 `fatherFn` 函数的 `this` 指向 `sonFn` 的 `this`
@@ -88,9 +108,80 @@ fatherFn.call(this, ...args)
 优点：
 
 1. 可以向父类传递参数
-2. 解决了原型链继承中：杜磊使用 this 声明的属性会在所有的实例中共享的问题
+2. 解决了原型链继承中：杜绝使用 this 声明的属性会在所有的实例中共享的问题
 
 缺点：
 
 1. 只能继承父类通过 `this` 声明的属性、方法，不能继承父类 `prototype` 上的属性和方法
 2. 父类方法无法复用：因为无法继承父类 `prototype`，所以每次实例化都要执行父类方法，重新声明 `this` 里所定义的方法，因此无法复用
+
+## 3、寄生组合式继承
+
+```js
+function Person(name, age, friends) {
+  this.name = name;
+  this.age = age;
+  this.friends = friends;
+}
+Person.prototype.running = function () {
+  console.log(this.name + '在跑步');
+};
+function Student(name, age, friends, score) {
+  Person.call(this, name, age, friends);
+  this.score = score;
+}
+inheritPrototype(Student, Person);
+Student.prototype.sayScore = function () {
+  console.log(this.score);
+};
+
+// 工具函数---继承原型
+function inheritPrototype(subType, superType) {
+  // 创建新对象，并将prototype指向父类的prototype，此时constructor是指向父类的
+  subType.prototype = Object.create(superType.prototype);
+  // 将subType的prototype.constructor指向自己
+  // subType.prototype.constructor = subType;
+  // Object.defineProperty精准控制constructor是否可枚举，可编辑
+  Object.defineProperty(subType.prototype, 'constructor', {
+    value: subType,
+    enumerable: false,
+    writable: true,
+    configurable: true,
+  });
+}
+```
+
+## 4、class 继承
+
+```js
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  running() {
+
+}
+```
+
+# 原型判断方法
+
+```js
+var obj = {
+  name: 'zhangyunlei',
+  age: 18,
+};
+var info = Object.create(obj, {
+  value: '张三',
+  enumerable: true,
+});
+// 1、判断是否是自身的属性
+console.log(info.hasOwnProperty('value')); //true
+///2、 in 操作符 判断存在该属性，不管是自身的还是原型上的
+console.log('value' in info); //true
+console.log('name' in info); //true
+// 3、 instanceof 判断是否是某个构造函数的实例,判断Object.prototype是否出现在info的原型链上
+console.log(info instanceof Object); //true
+// 4、isPrototypeOf 检查某个对象是否出现在另一个对象的原型链上
+console.log(Object.prototype.isPrototypeOf(info)); //true
+```

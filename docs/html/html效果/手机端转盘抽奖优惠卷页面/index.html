@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		
+		<link rel="stylesheet" href="ydui.css" />
+		<script type="text/javascript" src="ydui.flexible.js" ></script>
+		<script type="text/javascript" src="jquery.min.js" ></script>
+		<script type="text/javascript" src="turntable.js" ></script>
+		<title></title>
+		<style type="text/css">
+			.g-scrollview{background: #ed4f39;
+			background-image: -webkit-gradient(linear,right 0,right 100%,from(#fa7312),to(#ed4f39))!important;
+		    background-image: -webkit-linear-gradient(right,#fa7312,0%,#ed4f39,100%)!important;
+		    background-image: -moz-linear-gradient(right,#fa7312 0,#ed4f39 100%)!important;
+		    background-image: linear-gradient(to right,#fa7312 0,#ed4f39 100%)!important;
+		    }
+			.cjbg{ background: url(images/cjbg.png); background-repeat: no-repeat; background-size: 100% ; width: 100%;padding-top: 4.5rem;}
+			.lottery{ background: #FFFFFF;  margin-left: .3rem; margin-right: .3rem; position: relative;z-index: 1; border-radius: .3rem; padding: .3rem;}
+			.lotterymore{ text-align: right; color: #FF6F37;font-size: .35rem; margin-bottom:.3rem;}
+			.lotterymore .iconmore{ background: url(images/icon-more.png); background-size: 100% 100%; padding:.05rem .24rem; margin-left: .2rem;}
+			.lotteryTurntable{ position: relative;z-index: 2; }
+			.myCanvass{width: 100%;}
+			.numberinfo{ 
+				 margin-top: .1rem;
+				 margin-left: 6%;
+				text-align: center; 
+				width: 90%; height: 1.4rem; background: url(images/button.png); background-repeat: no-repeat; background-size: 100% 100%; line-height: 1.2rem;font-size: .35rem; color: #FFF7E4;}
+				.lottery img {
+			        position: absolute;
+				    width: 27.5%;
+				    height: 33.5%;
+				    left: 36%;
+				    top: 30.5%;
+				    border: 0;
+				    background: none;
+			}
+			.Awardedlist{ line-height: .35rem; height: 4rem; overflow: hidden;}
+			.Awardedlist b{color: #F23030; margin-right: .1rem;}
+			.ulelink{z-index: 1111; position: fixed; top:6rem; left:0; width: 1.5rem; height: 1rem; text-align: center; line-height: .8rem;border-radius: 0 .45rem .45rem 0; color: #FFFFFF; padding: .1rem;font-size: .35rem; background: #FFC000;}
+			.munprompt{position: fixed; width: 100%; height: 100%; background:rgba(0,0,0,0.4);z-index: 1;top:0;left: 0; display: none;}
+			.munprompt .promptbg{ background: url(images/prompt1.png) no-repeat;position: absolute;z-index: 111; background-size: 100% 100%; height: 7rem; width: 80%; top:50%; margin-top: -3.5rem; left: 50%; margin-left: -40%;}
+			.Orderlink{ position: absolute;z-index: 1111; height: 5rem; width: 80%; top:50%; margin-top: -3.5rem; left: 50%; margin-left: -40%;}
+			.closeprompt{position: absolute;z-index: 1111; width: 1rem; height: .7rem; bottom:0rem; left: 50%; margin-left: -.5rem;}
+			.userprompt,
+			.lotteryprompt{
+				position: fixed; width: 100%; height: 100%; background:rgba(0,0,0,0.4);z-index: 1;top:0;left: 0;
+			}
+			.userprompt .promptbg{
+				background: url(images/prompt1.png) no-repeat;position: absolute;z-index: 111; background-size: 100% 100%; height: 7rem; width: 80%; top:50%; margin-top: -3.5rem; left: 50%; margin-left: -40%;
+			}
+			.lotteryprompt{display: none;}
+			.lotteryprompt .promptbg{
+					background: url(images/prompt3.png) no-repeat;position: absolute;z-index: 111; background-size: 100% 100%; height: 7rem; width: 80%; top:50%; margin-top: -3.5rem; left: 50%; margin-left: -40%;
+			}
+			.contentinfo{ 
+			   width: 60%;
+			    left: 50%;
+			    text-align: center;
+			    color: #ffffff;
+			    margin: 0 auto;
+			    position: absolute;
+			    top: 2rem;
+			    margin-left: -30%;
+			    font-size: .4rem;
+			}
+			.Awardedbutton{
+				position: absolute;
+			    width: 3rem;
+			    height: .8rem;
+			    line-height: .8rem;
+			    top: 3.5rem;
+			    z-index: 11111;
+			    left: 50%;
+			    margin-left: -1.5rem;
+			    background: #ffb845;
+			    border: 0px;
+			    border-radius: .4rem;
+			    font-size: .35rem;
+			    color: #ffffff;
+			    font-family: 'YDUI-ICONS';
+			    text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<section class="g-flexview">
+			<header class="m-navbar">
+        <a href="javascript:history.go(-1)" class="navbar-item"><i class="icon-deletes"></i></a>
+        <div class="navbar-center"><span class="navbar-title">114便民</span></div>
+          <a href="#" class="navbar-item"><i class="icon-more"></i></a>
+    </header>
+    <section class="g-scrollview">
+    	<div class="cjbg">
+    	<div class="lottery">
+    		<a href="hd1-ule.html" class="ulelink">规则</a>
+    		<div class="lotterymore"><a href="hd1-recording.html">中奖纪录<i class="iconmore"></i></a></div>
+    		<div class="lotteryTurntable">
+    			 <canvas id="myCanvas" class="myCanvass" width="600px" height="600px">
+		            
+		        </canvas>
+		        <img src="images/p.png" id="start">
+		        
+    		</div>
+    		<div class="numberinfo">今天还有<em id="number">3</em>次机会</div>
+    		 <p id="message"></p>
+    		 <!--获奖纪录-->
+    		 <div class="Awardedlist" id="scrollDiv">
+    		 <ul>
+				<li class="cell-item"><span class="cell-left">189****0275 2021年1月28日9:00</span>  <span class="cell-right"><b>特等奖</b> 扫地机器人</span>  </li>
+				<li class="cell-item"><span class="cell-left">189****0275 2021年1月28日9:00</span>  <span class="cell-right"><b>特等奖</b> 扫地机器人</span>  </li>
+				<li class="cell-item"><span class="cell-left">189****0275 2021年1月28日9:00</span>  <span class="cell-right"><b>特等奖</b> 扫地机器人</span>  </li>
+				<li class="cell-item"><span class="cell-left">189****0275 2021年1月28日9:00</span>  <span class="cell-right"><b>特等奖</b> 扫地机器人</span>  </li>
+				<li class="cell-item"><span class="cell-left">189****0275 2021年1月28日9:00</span>  <span class="cell-right"><b>特等奖</b> 扫地机器人</span>  </li>
+				<li class="cell-item"><span class="cell-left">189****0275 2021年1月28日9:00</span>  <span class="cell-right"><b>特等奖</b> 扫地机器人</span>  </li>
+    		 </ul>
+    		 </div>
+    	</div>
+    	<!--提示-->
+    	<div class="userprompt">
+    		<div class="promptbg"><div class="closeprompt" id="closeprompt1"></div></div>
+    		<a href="#" class="Orderlink"></a>
+    		
+    	</div>
+    	<div class="munprompt">
+    		<div class="promptbg"><div class="closeprompt" id="closeprompt"></div></div>
+    		<a href="#" class="Orderlink"></a>
+    		
+    	</div>
+    	<!--获奖提示-->
+    	<div class="lotteryprompt">
+    		<div class="promptbg" id="promptcontent"><div class='closeprompt' id='closeprompt2'></div></div>
+    		
+    	</div>
+    	</div>
+    </section>
+		</section>
+
+	<script>
+		/*
+jQ向上滚动带上下翻页按钮
+*/
+(function($){
+$.fn.extend({
+        Scroll:function(opt,callback){
+                //参数初始化
+                if(!opt) var opt={};
+                var _btnUp = $("#"+ opt.up);//Shawphy:向上按钮
+                var _btnDown = $("#"+ opt.down);//Shawphy:向下按钮
+                var timerID;
+                var _this=this.eq(0).find("ul:first");
+                var     lineH=_this.find("li:first").height(), //获取行高
+                        line=opt.line?parseInt(opt.line,10):parseInt(this.height()/lineH,10), //每次滚动的行数，默认为一屏，即父容器高度
+                        speed=opt.speed?parseInt(opt.speed,10):500; //卷动速度，数值越大，速度越慢（毫秒）
+                        timer=opt.timer //?parseInt(opt.timer,10):3000; //滚动的时间间隔（毫秒）
+                if(line==0) line=1;
+                var upHeight=0-line*lineH;
+                //滚动函数
+                var scrollUp=function(){
+                        _btnUp.unbind("click",scrollUp); //Shawphy:取消向上按钮的函数绑定
+                        _this.animate({
+                                marginTop:upHeight
+                        },speed,function(){
+                                for(i=1;i<=line;i++){
+                                        _this.find("li:first").appendTo(_this);
+                                }
+                                _this.css({marginTop:0});
+                                _btnUp.bind("click",scrollUp); //Shawphy:绑定向上按钮的点击事件
+                        });
+
+                }
+                //Shawphy:向下翻页函数
+                var scrollDown=function(){
+                        _btnDown.unbind("click",scrollDown);
+                        for(i=1;i<=line;i++){
+                                _this.find("li:last").show().prependTo(_this);
+                        }
+                        _this.css({marginTop:upHeight});
+                        _this.animate({
+                                marginTop:0
+                        },speed,function(){
+                                _btnDown.bind("click",scrollDown);
+                        });
+                }
+               //Shawphy:自动播放
+                var autoPlay = function(){
+                        if(timer)timerID = window.setInterval(scrollUp,timer);
+                };
+                var autoStop = function(){
+                        if(timer)window.clearInterval(timerID);
+                };
+                 //鼠标事件绑定
+                _this.hover(autoStop,autoPlay).mouseout();
+                _btnUp.css("cursor","pointer").click( scrollUp ).hover(autoStop,autoPlay);//Shawphy:向上向下鼠标事件绑定
+                _btnDown.css("cursor","pointer").click( scrollDown ).hover(autoStop,autoPlay);
+
+        }       
+})
+})(jQuery);
+		   $("#scrollDiv").Scroll({line:1,speed:500,timer:3000,up:"but_up",down:"but_down"});
+		//关闭图层
+		$("#closeprompt").on('click', function () {
+			$(".munprompt").css("display",'none')
+		});
+		$("#closeprompt1").on('click', function () {
+			$(".userprompt").css("display",'none')
+		});
+		$("#closeprompt2").on('click', function () {
+			$(".lotteryprompt").css("display",'none')
+		}) 
+	   var wheelSurf
+        // 初始化装盘数据 正常情况下应该由后台返回
+        var initData = {
+            "success": true,
+            "list": [{
+                    "id": 100,
+                    "grade":"",
+                    "name": "谢谢参与",
+                    "image": "images/iconx.png",
+                    "rank":1,
+                    "percent":3
+                },
+                {
+                    "id": 101,
+                    "grade":"特等奖",
+                    "name": "小米扫地机器人 （一部）",
+                    "image": "images/y1.png",
+                    "rank":2,
+                    "percent":5
+                },
+                {
+                    "id": 102,
+                    "grade":"一等奖",
+                    "name": "50元代金券 （一张）",
+                    "image": "images/y5.png",
+                    "rank":3,
+                    "percent":2
+                },
+                {
+                    "id": 103,
+                    "grade":"",
+                    "name": "谢谢参与",
+                    "image": "images/iconx.png",
+                    "rank":4,
+                    "percent":49
+                },
+                {
+                    "id": 104,
+                    "grade":"二等奖",
+                    "name": "30元代金券 （一张）",
+                    "image": "images/y3.png",
+                    "rank":5,
+                    "percent":30
+                },
+                {
+                    "id": 105,
+                     "grade":"三等奖",
+                    "name": "20元代金券 （一张）",
+                    "image": "images/y2.png",
+                    "rank":6,
+                    "percent":1
+                }
+            ]
+        }
+
+        // 计算分配获奖概率(前提所有奖品概率相加100%)
+        function getGift(){
+            var percent = Math.random()*20
+            var totalPercent = 0
+            for(var i = 0 ,l = initData.list.length;i<l;i++){
+                totalPercent += initData.list[i].percent
+                if(percent<=totalPercent){
+                    return initData.list[i]
+                }
+            }           
+        }
+
+        var list = {}
+        
+        var angel = 360 / initData.list.length
+        // 格式化成插件需要的奖品列表格式
+        for (var i = 0, l = initData.list.length; i < l; i++) {
+            list[initData.list[i].rank] = {
+                id:initData.list[i].id,
+                name: initData.list[i].name,
+                image: initData.list[i].image,
+                grade: initData.list[i].grade
+            }
+        }
+        // 查看奖品列表格式
+        
+        // 定义转盘奖品
+        wheelSurf = $('#myCanvas').WheelSurf({
+            list: list, // 奖品 列表，(必填)
+            outerCircle: {
+                color: '#FF2B00' // 外圈颜色(可选)
+            },
+            innerCircle: {
+                color: '#FCB440' // 里圈颜色(可选)
+            },
+            dots: ['#fbf0a9', '#fbb936'], // 装饰点颜色(可选)
+            disk: ['#F6ECB4', '#FFF9D9', '#F6ECB4', '#FFF9D9', '#F6ECB4', '#FFF9D9'], //中心奖盘的颜色，默认7彩(可选)
+            title: {
+                color: '#FF302D',
+                font: '22px Arial'
+            } // 奖品标题样式(可选)
+        })
+
+        // 初始化转盘
+        wheelSurf.init()
+        // 抽奖
+        var throttle = true;
+        $("#start").on('click', function () {
+            var mun=parseInt($("#number").html()); 
+           
+            if(mun!=0){
+            	mun--
+                $("#number").html(mun);
+            	 var winData = getGift() // 正常情况下获奖信息应该由后台返回
+	            if(!throttle){
+	                return false;
+	            }
+	            throttle = false;
+	            var count = 0
+	            // 计算奖品角度
+	
+	            for (const key in list) {
+	                if (list.hasOwnProperty(key)) {                    
+	                    if (winData.id == list[key].id) {
+	                        break;
+	                    }
+	                    count++    
+	                }
+	            }
+	      
+	            // 转盘抽奖，
+	            wheelSurf.lottery((count * angel + angel / 2), function () {
+	            	$(".lotteryprompt").css("display",'block');
+	            	var html="";
+	            	$(".contentinfo").html("");
+	            	if(winData.grade==""){
+	            		html="<div class='contentinfo'>"+winData.name+"</div>"
+	            		$("#promptcontent").append(html);
+	            		
+	            	}else if(winData.grade=="特等奖"){
+	            		html="<div class='contentinfo'>恭喜你获得："+winData.name+"</div><a href='hd1-recording.html' class='Awardedbutton'>查看获奖纪录</a>"
+	            		$("#promptcontent").append(html);
+	            	}else{
+	            		html="<div class='contentinfo'>恭喜你获得："+winData.name+"</div><a href='hd1-recording.html' class='Awardedbutton'>查看获奖纪录</a>"
+	            		$("#promptcontent").append(html);
+	            		
+	            	}
+	                throttle = true;
+	            })
+            }else{
+            	
+            	$(".munprompt").css("display",'block')
+            }           
+        })
+
+	</script>
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>cpm system</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- datatables -->
+    <link href="jquery.dataTables.min.css" rel="stylesheet"/>
+
+    <link href="/css/common.css" rel="stylesheet"/>
+</head>
+<body>
+
+
+<div id="tableArea" style="padding: 100px;">
+
+    <table id="example" class="display table table-bordered" cellspacing="0" width="600" style="margin-top: 50px">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Age</th>
+        </tr>
+        </thead>
+    </table>
+    </table>
+
+</div>
+
+</body>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="jquery-2.1.1.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="bootstrap.min.js"></script>
+
+<!-- datatables -->
+<script src="jquery.dataTables.min.js"></script>
+
+<script src="/js/common.js"></script>
+
+<script type="text/javascript">
+
+
+var dataSet = [
+  ["Tiger Nixon", "Edinburgh", 20, 3, 1],
+  ["Garrett Winters", "Tokyo", 22, 0, 2],
+  ["Ashton Cox", "Tokyo", 21, 0, 0]
+];
+$('#example').DataTable({
+  data: dataSet,
+  paging: true,
+  searching: false, //搜索栏
+  lengthChange: false, //是否允许改变每页显示的数据条数
+  ordering: false,
+  columnDefs: [{
+    targets: [1, 2],
+    createdCell: function (td, cellData, rowData, col, row) {
+      let rowspan3 = rowData[3];
+      let rowspan4 = rowData[4];
+      console.log("createdCell==", col, row, rowspan3, rowspan4)
+      if (row == 1 && rowspan3 > 1) {
+        $(td).attr('rowspan', rowspan3)
+      }
+      if (row == 2 && rowspan4 > 1) {
+        $(td).attr('rowspan', rowspan3)
+      }
+      if (row == 1 && rowspan3 == 0 || row == 2 && rowspan4 == 0) {
+        $(td).remove();
+      }
+    }
+  }]
+});
+
+// var dataSet = [
+//   ["Tiger Nixon", "Edinburgh", 20, 1, 1],
+//   ["Garrett Winters", "Tokyo", 22, 2, 0],
+//   ["Ashton Cox", "Tokyo", 21, 1, 1]
+// ];
+// $('#example').DataTable({
+//   data: dataSet,
+//   paging: true,
+//   searching: false, //搜索栏
+//   lengthChange: false, //是否允许改变每页显示的数据条数
+//   ordering: false,
+//   columnDefs: [{
+//     targets: [1, 2],
+//     createdCell: function (td, cellData, rowData, col, row) {
+//       if (rowData[3] > 1 && row == 1) {
+//         $(td).attr('colspan', rowData[3])
+//       }
+//       if (rowData[4] == 0 && row == 2) {
+//         $(td).remove();
+//       }
+//     }
+//   }]
+// });
+
+</script>
+
+</html>

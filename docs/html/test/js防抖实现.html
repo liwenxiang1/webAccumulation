@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover"/>
+
+</head>
+<body>
+<button id="btn1">防抖测试</button>
+<button id="btn2">节流测试</button>
+<script>
+//节流
+function throttle(fn, delay) {
+  let lastTime = 0;
+  return function () {
+    let nowTime = Date.now()
+    if (nowTime - lastTime > delay) {
+      fn.apply(this)
+      lastTime = nowTime;
+    }
+  }
+}
+
+//防抖
+function debounce(fn, delay) {
+  let timer = null;
+  return function () {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn.call(this)
+    }, delay)
+  }
+}
+
+document.getElementById('btn1').onclick = debounce(() => {
+  console.log("防抖！")
+}, 1000)
+document.getElementById('btn2').onclick = throttle(() => {
+  console.log("节流！")
+}, 1000)
+</script>
+</body>
+</html>

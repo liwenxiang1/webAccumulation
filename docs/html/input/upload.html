@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+</head>
+<body>
+<div>
+    <button onclick="uploadClick()">附件上传</button>
+    <input style="visibility: hidden" type="file" id="upload-input" accept="image/*" value="附件上传"
+           onchange="fileChange(event)">
+    <ul id="file-list"></ul>
+</div>
+<script>
+let svgImg = '<svg t="1688608777483" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2604" width="20" height="20"><path d="M512 883.2A371.2 371.2 0 1 0 140.8 512 371.2 371.2 0 0 0 512 883.2z m0 64a435.2 435.2 0 1 1 435.2-435.2 435.2 435.2 0 0 1-435.2 435.2z" fill="#5A5A68" p-id="2605"></path><path d="M557.056 512l122.368 122.368a31.744 31.744 0 1 1-45.056 45.056L512 557.056l-122.368 122.368a31.744 31.744 0 1 1-45.056-45.056L466.944 512 344.576 389.632a31.744 31.744 0 1 1 45.056-45.056L512 466.944l122.368-122.368a31.744 31.744 0 1 1 45.056 45.056z" fill="#5A5A68" p-id="2606"></path></svg>'
+let fileList = []
+
+
+function uploadClick() {
+  document.getElementById('upload-input').click()
+}
+
+function deleteImg(event) {
+  console.log("deleteImg", event)
+  var key = event.getAttribute("data-key");
+  let targetLi = document.getElementById(key)
+  document.getElementById('file-list').removeChild(targetLi)
+  
+}
+
+function fileChange(e) {
+  if (e.target.files.length == 0) {
+    return;
+  }
+  const imageFile = e.target.files[0];
+  fileList.push(imageFile);
+  renderFileList();
+}
+
+function renderFileList() {
+  document.getElementById('file-list').innerHTML = "";
+  for (let i = 0; i < fileList.length; i++) {
+    let imageFile = fileList[i]
+    let fileObj = document.createElement('li')
+    fileObj.setAttribute('id', imageFile.lastModified)
+    fileObj.innerHTML = `<div style="display: flex;flex-direction: row;justify-content: center;width: fit-content;align-items: center">
+                            <span style="margin-right: 7px">${imageFile.name}</span>
+                            <div style="display: flex" data-key="${imageFile.lastModified}" onclick="deleteImg(this)">${svgImg}</div>
+                        </div>`
+    document.getElementById('file-list').appendChild(fileObj)
+  }
+}
+</script>
+</body>
+</html>

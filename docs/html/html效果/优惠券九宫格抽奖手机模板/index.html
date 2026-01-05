@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>大转盘</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script src="flexible.js" type="text/javascript" charset="utf-8"></script>
+		<script src="zepto.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<!--返回-->
+		<div class="top">
+			<i></i>幸运大转盘
+		</div>
+		<!--抽奖区-->
+		<div class="lottery">
+			<ul>
+				<li class="item">
+					<img src="images/jp1.png" />
+					<p>10元优惠卷</p>
+				</li>
+				<li class="item">
+					<img src="images/jp2.png" />
+					<p>20元优惠卷</p>
+				</li>
+				<li class="item">
+					<img src="images/jp3.png" />
+					<p>30元优惠卷</p>
+				</li>
+				<li class="item">
+					<img src="images/jp3.png" />
+					<p>30元优惠卷</p>
+				</li>
+				<li class="begin" id="begin">
+					<p>剩余<span>3</span>次机会</p>
+				</li>
+				<li class="item">
+					<img src="images/jp1.png" />
+					<p>10元优惠卷</p>
+				</li>
+				<li class="item">
+					<img src="images/jp2.png" />
+					<p>20元优惠卷</p>
+				</li>
+				<li class="item">
+					<img src="images/jp1.png" />
+					<p>10元优惠卷</p>
+				</li>
+				<li class="item">
+					<img src="images/jp3.png" />
+					<p>30元优惠卷</p>
+				</li>
+			</ul>
+		</div>
+		<!--规则奖品按钮-->
+		<div class="foot">
+			<a class="rule"></a>
+			<a class="goods"></a>
+		</div>
+	</body>
+
+</html>
+<script>
+	var beginBtn = true;//是否可以抽奖
+	var lotteryNum = 3;//可抽奖次数
+	var lotteryArray = [0,1,2,4,7,6,5,3] //定义抽象顺序
+	var lotteryIndex = 0;//当前的奖品位置
+	var lotteryTime = 3000;//抽奖的时间，为了随机上下会浮动1-2秒
+	var timer = null; //抽奖定时器
+	var result = [];//最终的抽奖结果，看控制台
+	$('#begin').click(function(){
+		// 有抽奖次数且状态为可抽奖才能点击，防止抽奖过程中再次点击
+		if(beginBtn){
+			// 判断是否还有抽奖次数
+			if(lotteryNum==0){
+				alert("你的抽奖次数已用尽！")
+				return
+			}
+			// 把抽奖状态设置为不可点击
+			beginBtn = false
+			//抽奖次数递减
+			lotteryNum--
+			$('#begin span').text(lotteryNum)
+			$('#begin').addClass('clicked')
+			// 抽奖定时器开始
+			timer = setInterval(function(){
+                    $('.lottery ul li.item').eq(lotteryArray[lotteryIndex]).removeClass('active');
+                    lotteryIndex++; 
+                    if (lotteryIndex >= 8) {
+                        lotteryIndex = 0;
+                    }
+                    $('.lottery ul li.item').eq(lotteryArray[lotteryIndex]).addClass('active');
+            },100)
+			// 结束抽奖
+			setTimeout(function(){
+				$('#begin').removeClass('clicked')
+				clearInterval(timer);
+				if(lotteryNum>=0){
+					beginBtn = true
+				}
+				// 最终中奖结果
+				var currentResult = $('.lottery ul li.item').eq(lotteryArray[lotteryIndex]).find('p').text();
+				// 把每次结果加入到数组中
+				result.push(currentResult)
+				// 移除中奖效果
+				$('.lottery ul li.item').removeClass('active');
+				alert("恭喜你抽中："+currentResult)
+				console.log(result)
+			}, Math.round(Math.random() * lotteryTime) + 1000)
+		}
+	})
+	// 点击最终中奖按钮,没有页面 这里只做简单提示
+	$('.foot .goods').click(function(){
+		if(result.length==0){
+			alert("你的奖品空空如也,快去抽奖吧！")
+			return
+		}else{
+			alert("你共抽中了："+result.join())	
+		}
+	})
+</script>

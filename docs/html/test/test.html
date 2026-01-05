@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>自定义右键菜单</title>
+    <style>
+        ul {
+            display: none;
+            box-shadow: 0px 0px 5px;
+            text-align: center;
+            width: 160px;
+            height: 140px;
+            position: absolute;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            height: 34px;
+            line-height: 34px;
+            font-size: 16px;
+            list-style: none;
+            border-bottom: 1px solid #eee;
+        }
+
+        li:last-child {
+            border-bottom: none;
+            height: 35px;
+            line-height: 35px;
+        }
+
+        li:hover {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+
+<ul id='menu'>
+    <li>选项一</li>
+    <li>选项二</li>
+    <li>选项三</li>
+    <li>选项四</li>
+</ul>
+</body>
+<script>
+
+    var el = document.getElementById('menu');
+
+    document.oncontextmenu = function (event) {
+        event.preventDefault();
+
+        el.style.display = 'block';
+        el.style.left = event.clientX + 'px';
+        el.style.top = event.clientY + 'px';
+
+    }
+    document.onclick = function (event) {
+        el.style.display = 'none';
+    }
+    var canvas = document.createElement('canvas');
+    canvas.width = 500;
+    canvas.height = 500;
+    canvas.style.backgroundColor = '#ddd';
+    document.body.appendChild(canvas);
+
+    var ctx = canvas.getContext('2d');
+    var x = 100,
+        y = 100,
+        width = 150,
+        height = 150,
+        rectCenterPoint = {x: x+width/2, y: y+height/2}, // 矩形中心点
+        scaleX = 0.5,
+        scaleY = 0.4;
+
+    // 缩放前(红色矩形)
+    ctx.fillStyle = '#f00';
+    ctx.fillRect(x, y, width, height);
+
+    // 缩放后(绿色矩形)
+    ctx.translate(rectCenterPoint.x*(1-scaleX), rectCenterPoint.y*(1-scaleY));
+    ctx.scale(scaleX, scaleY);
+    ctx.fillStyle = '#690';
+    ctx.fillRect(x, y, width, height);
+</script>
+</html>

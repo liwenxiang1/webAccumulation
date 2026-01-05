@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>input</title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+<input id="inputView" placeholder="请输入">
+<button id="sendBtn">发送</button>
+</body>
+</html>
+<script>
+$("#sendBtn").click(function () {
+  let msgtext = $('#inputView').val()
+  test("message====", msgtext)
+  test("message------", encodeURIComponent('您好，您还在线吗？'))
+})
+
+function test(flag, msg) {
+  var msgtext =msg.split(',');
+  let text = [].concat(msgtext);
+  let messages = [];
+  for (let i = 0; i < text.length; i++) {
+    let sbhp = text[i].replace(/\\/g, "\\\\");
+    messages.push(sbhp);
+  }
+  let userId = '123', id = '222', date = '333'
+  let message = '{"toUserName":"' + userId + '","sessionNo":"' + id + '","createTime": "' + date + '","msgType":"text","content":"' + messages + '","filePath":"","fileName":"","fileType":"","fileSize":0}';
+  console.log(flag, message)
+
+}
+</script>

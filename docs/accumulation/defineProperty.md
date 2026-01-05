@@ -1,8 +1,8 @@
 <!--
  * @Author: liwenxiang
  * @Date: 2024-03-04 22:15:44
- * @LastEditors: liwenxiang
- * @LastEditTime: 2024-03-04 22:29:58
+ * @LastEditors: “liwx” “1258598654qq.com”
+ * @LastEditTime: 2025-04-22 16:37:54
 -->
 
 # Object.defineProperty
@@ -36,28 +36,42 @@ Object.defineProperty 需要三个参数
 
 ```js
 let obj = {
-	singer: '周杰伦'
-}
-let value = '青花瓷'
+  singer: '周杰伦',
+};
+let value = '青花瓷';
 Object.defineProperty(obj, 'music', {
-	enumerable: true, // 设置可枚举
-	get() {
-		// 获取obj.music的时候就会调用get方法
-		// let value = "强行设置get的返回值"; // 打开注释 读取属性永远都是‘强行设置get的返回值’
-		return value
-	},
-	set(val) {
-		// value = val; // 将修改的值重新赋给song
-		value = '强行设置修改的值'
-	}
-})
+  enumerable: true, // 设置可枚举
+  get: () => {
+    // 获取obj.music的时候就会调用get方法
+    // let value = "强行设置get的返回值"; // 打开注释 读取属性永远都是‘强行设置get的返回值’
+    return value;
+  },
+  set: (val) => {
+    // value = val; // 将修改的值重新赋给song
+    value = '强行设置修改的值';
+  },
+});
 
-console.log(obj.music) // 青花瓷
-delete obj.music // 删除无效
-console.log(obj.music) // 青花瓷
-obj.music = '听妈妈的话'
-console.log(obj.music) // 强行设置修改的值
+console.log(obj.music); // 青花瓷
+delete obj.music; // 删除无效
+console.log(obj.music); // 青花瓷
+obj.music = '听妈妈的话';
+console.log(obj.music); // 强行设置修改的值
 for (let key in obj) {
-	console.log(key) // singer, music 上面设置了enumerable可枚举
+  console.log(key); // singer, music 上面设置了enumerable可枚举
 }
+```
+
+## 也可以访问器器属性和普通属性同时存在
+
+```js
+let obj = {
+  _singer: '周杰伦',
+  get name(){
+	return this._singer;
+  }
+  set name(val){
+	this._singer = val;
+  }
+};
 ```

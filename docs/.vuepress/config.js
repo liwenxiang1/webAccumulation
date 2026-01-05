@@ -1,9 +1,3 @@
-/*
- * @Author: liwenxiang
- * @Date: 2024-03-03 18:09:23
- * @LastEditors: “liwx” “1258598654qq.com”
- * @LastEditTime: 2024-08-20 17:49:32
- */
 import { webpackBundler } from '@vuepress/bundler-webpack';
 import { defaultTheme } from '@vuepress/theme-default';
 import { defineUserConfig } from 'vuepress/cli';
@@ -40,6 +34,10 @@ export default defineUserConfig({
         link: '/markdown/前端/html/css知识',
       },
       {
+        text: '学习知识',
+        link: '/mianshi/原型与原型链',
+      },
+      {
         text: '大屏案例',
         link: 'https://github.com/liwenxiang1/bigScreen',
       },
@@ -69,7 +67,9 @@ export default defineUserConfig({
             '/accumulation/val',
             '/accumulation/array',
             '/accumulation/deepclone',
-            '/accumulation/setAndmap',
+            '/accumulation/模块化',
+            '/accumulation/V8引擎',
+            '/accumulation/闭包',
           ],
         },
       ],
@@ -163,6 +163,13 @@ export default defineUserConfig({
               text: '常用正则表达式',
               link: '/utils/regExp',
               children: ['/utils/regExp'],
+            },
+            {
+              text: 'Javascript之“+“、“!“、“!!“、“!!+“写法使用说明',
+              link: '/utils/Javascript特殊写法使用说明',
+              children: [
+                '/utils/Javascript之“+“、“!“、“!!“、“!!+“写法使用说明',
+              ],
             },
           ],
         },
@@ -370,6 +377,27 @@ export default defineUserConfig({
               ],
             },
             {
+              text: 'ES6',
+              children: [
+                '/markdown/前端/ES6/Class',
+                '/markdown/前端/ES6/ES6转ES5',
+                '/markdown/前端/ES6/解构',
+                '/markdown/前端/ES6/ProxyAndReflect',
+                '/markdown/前端/ES6/Symbol',
+                '/markdown/前端/ES6/SetAndMap',
+                '/markdown/前端/ES6/ES7以后',
+                '/markdown/前端/ES6/响应式',
+                '/markdown/前端/ES6/Promise',
+                '/markdown/前端/ES6/Promise的内部实现',
+                '/markdown/前端/ES6/迭代器iterator和生成器generator',
+                '/markdown/前端/ES6/async',
+              ],
+            },
+            {
+              text: 'Typescript',
+              children: ['/markdown/前端/typescript/ts'],
+            },
+            {
               text: 'vue',
               // link: '/markdown/前端/vue/vue3+ts+vite+electron知识',
               children: [
@@ -444,6 +472,7 @@ export default defineUserConfig({
                 },
               ],
             },
+
             // {
             //   text: '调研测试',
             //   // link: '/markdown/前端/调研测试/第3讲API接口说明@20181025',
@@ -482,6 +511,107 @@ export default defineUserConfig({
             //     },
             //   ],
             // },
+          ],
+        },
+      ],
+      '/mianshi': [
+        {
+          text: '面试',
+          link: '/mianshi/原型与原型链',
+          sidebarDepth: 1,
+          children: [
+            {
+              text: '原型与原型链',
+              link: '/mianshi/原型与原型链',
+            },
+            {
+              text: 'this指向的几种情况',
+              link: '/mianshi/this指向的几种情况',
+            },
+            {
+              text: '[Vue3]Vue3的13种传参通信方式',
+              link: '/mianshi/vue3的十三种传参方式',
+            },
+            {
+              text: 'axios 请求的底层依赖是什么',
+              link: '/mianshi/axios 请求的底层依赖是什么',
+            },
+            {
+              text: '[Vue3]介绍一下 defineModel',
+              link: '/mianshi/介绍一下defineModel',
+            },
+            {
+              text: '[Vue]Vue的响应式',
+              link: '/mianshi/Vue的响应式',
+            },
+            {
+              text: '[Web]cookie 可以实现不同域共享吗',
+              link: '/mianshi/cookie 可以实现不同域共享吗',
+            },
+            {
+              text: '[Http]axios 是否可以取消请求',
+              link: '/mianshi/axios是否可以取消请求',
+            },
+            {
+              text: '[Webpack]如何提取复用代码给多个entry使用',
+              link: '/mianshi/如何提取复用代码给多个 entry 使用',
+            },
+            {
+              text: '[Webpack]output配置里面，chunkFilename和filename区别是什么',
+              link: '/mianshi/[Webpack] output 配置里面， chunkFilename 和 filename 区别是什么',
+            },
+            {
+              text: '[Webpack]支持哪些模块化加载',
+              link: '/mianshi/支持哪些模块化加载',
+            },
+            {
+              text: '[Webpack]webpack的主要配置项有哪些',
+              link: '/mianshi/webpack 的主要配置项有哪些',
+            },
+            {
+              text: '[webpack]optimize配置有哪些作用',
+              link: '/mianshi/optimize配置有哪些作用',
+            },
+            {
+              text: '[webpack]自定义Webpack的plugins和loader详解',
+              link: '/mianshi/自定义Webpack的plugins详解和loader.md',
+            },
+            {
+              text: '[webpack]Webpack构建流程',
+              link: '/mianshi/Webpack构建流程',
+            },
+            {
+              text: '[webpack]性能优化',
+              link: '/mianshi/[webpack]性能优化',
+            },
+            {
+              text: '[CSS]介绍一下CSS变量怎么声明和使用',
+              link: '/mianshi/介绍一下CSS变量怎么声明和使用',
+            },
+            {
+              text: 'esbuild和rollup都是vite的基础依赖，那么他们有啥不同',
+              link: '/mianshi/esbuild和rollup有啥不同',
+            },
+            {
+              text: 'vite 编译器有啥特点',
+              link: '/mianshi/vite 编译器有啥特点',
+            },
+            {
+              text: 'js延迟加载的几种方式',
+              link: '/mianshi/js延迟加载的几种方式',
+            },
+            {
+              text: 'JavaScript 类数组对象的定义',
+              link: '/mianshi/JavaScript 类数组对象的定义',
+            },
+            {
+              text: 'for...in和for...of的区别',
+              link: '/mianshi/for...in和for...of的区别',
+            },
+            {
+              text: 'Nginx配置',
+              link: '/mianshi/Nginx配置',
+            },
           ],
         },
       ],

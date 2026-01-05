@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>cpm system</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap.min.css" rel="stylesheet">
+
+    <!-- datatables -->
+    <script src="../jquery-2.1.1.js"></script>
+    <script src="../bootstrap.min.js"></script>
+    <script src="../jquery.dataTables.min.js"></script>
+    <script type="module" src="home.js"></script>
+    <style type="text/css">
+        tr > td {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="tableArea" style="padding: 100px;">
+    <table id="grid_box" class="dataTable" width="100%">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th width="120px">公司</th>
+            <th width="120px">分公司</th>
+            <th width="100px">物料编码</th>
+            <th width="200px">物料描述</th>
+            <th width="200px">生产厂家</th>
+            <th width="100px">单价(元)</th>
+            <th width="100px">总数量</th>
+            <th width="100px">合价(元)</th>
+            <th width="100px">已使用数量</th>
+            <th width="100px">现库存数量</th>
+            <th width="100px">单位</th>
+            <th width="100px">入库日期</th>
+        </tr>
+        </thead>
+    </table>
+
+</div>
+
+</body>
+
+</html>

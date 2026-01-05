@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+<div>
+    radio
+    <input id="radio1" type="radio" name="radio" value="1">男
+    <input id="radio2" type="radio" name="radio" value="2">女
+</div>
+<div style="margin-top: 50px">
+ checkbox
+    <input id="checkbox1" type="checkbox" name="checkbox" value="1">男
+    <input id="checkbox2" type="checkbox" name="checkbox" value="2">女
+</div>
+<script>
+$('#radio2').prop('checked', true)//radio默认选中
+$('#checkbox1').prop('checked', true)//radio默认选中
+//选择事件
+$('input[type=radio][name=radio]').change(function () {
+  // 获取input radio选中值，方法一
+  // var myvalue = $('input:radio[name="myname"]:checked').val();
+  // 获取input radio选中值，方法二
+  var myvalue = $(this).val();
+  console.log(myvalue)
+});
+// $('input[type=checkbox][name=checkbox]').change(function () {
+//   var myvalue = $('input:checkbox[name="checkbox"]:checked').val();
+//   console.log(myvalue)
+// });
+</script>
+</body>
+</html>
