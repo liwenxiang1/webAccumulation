@@ -14,15 +14,15 @@ https://www.cnblogs.com/wfc139/p/10383509.html
 ### 1.导出单个方法
 
 - 方式一：`export function`
-  ```
+  ```js
   //common.js 导出
   export function getRandomId() {}
   //index.js 引用
-  import { getRandomId } from '@/utils/common.js'
-  import * as common from '@/utils/common.js'
+  import { getRandomId } from '@/utils/common.js';
+  import * as common from '@/utils/common.js';
   ```
 - 方式二：`exports.xxx`
-  ```
+  ```js
   // number.js 导出
   'use strict';
   Object.defineProperty(exports, '__esModule', { value: true });
@@ -39,44 +39,42 @@ https://www.cnblogs.com/wfc139/p/10383509.html
 
 - 方式一：`module.exports`
 
-  ```
+  ```js
   //router.js 导出
   const router = {
     colorui: '/devTools/colorui/colorui',
-    imgfilter: '/devTools/imgfilter/imgfilter'
-  }
-  module.exports = router
+    imgfilter: '/devTools/imgfilter/imgfilter',
+  };
+  module.exports = router;
 
   //index.js 引用
-  import {
-    colorui
-  } from '../../router'
+  import { colorui } from '../../router';
   ```
 
 - 方式二：`module.exports`
 
-  ```
+  ```js
   //picture.js 导出
   async function getAccessToken(str64) {}
   module.exports = {
-    getAccessToken
-  }
+    getAccessToken,
+  };
 
   //index.js 引用
   const pictureModel = require('./picture.js');
-  pictureModel.getAccessToken(event.str64)
+  pictureModel.getAccessToken(event.str64);
   ```
 
 - 方式三：`export default`
-  ```
+  ```js
   //request.js 导出
-  const service = axios.create({})
-  export default service
+  const service = axios.create({});
+  export default service;
   //index.js 引用
-  import request from '@/utils/request'
+  import request from '@/utils/request';
   ```
 - 方式四：`export default`
-  ```
+  ```js
   //utils.js 导出
   const objToUrl = obj => {
     return ...;
@@ -94,7 +92,7 @@ https://www.cnblogs.com/wfc139/p/10383509.html
   utils.objToUrl(params)
   ```
 - 方式五：`export default`
-  ```
+  ```js
   //nfc.js 导出
   export default {
       listenNFCStatus: function () { ... },
@@ -121,7 +119,7 @@ https://www.cnblogs.com/wfc139/p/10383509.html
 
 区别于`forEach`方法，forEach 并不会新建数组
 
-```
+```js
 var array1 = [1,2,3,4];
 const map1 = array1.map(x => x *2);
 console.log(map1);
@@ -129,10 +127,10 @@ console.log(map1);
 > Array [2,4,5,8]
 ```
 
-```
+```js
 // map和async组合使用，返回操作结果的数组
-let res = await collection.get()
-res.data.map(async(document) => {
+let res = await collection.get();
+res.data.map(async (document) => {
   return await collection.doc(document.id).remove();
 });
 ```
@@ -141,7 +139,7 @@ res.data.map(async(document) => {
 
 > 用于把数组中的所有元素放入一个字符串。
 
-```
+```js
 var arr = [ "a", "b", "c", "d", "e" ];
 arr.join();  得到 a,b,c,d,e
 arr.join("-"); 得到 a-b-c-d-e
@@ -151,7 +149,7 @@ arr.join("-"); 得到 a-b-c-d-e
 
 > 用于提取字符串中介于两个指定下标之间的字符
 
-```
+```js
 var yearMonth="202012"
 yearMonth.substring(0, 4); 得到："2020"
 yearMonth.substring(4);  得到："12"
@@ -162,23 +160,23 @@ yearMonth.substring(4);  得到："12"
 将两个字符串或数组连接在一起；
 
 - 1、String.concat(str)
-  ```
+  ```js
   var s1 = 'abc';
   var s2 = 'def';
-  s1.concat(s2) // "abcdef"
+  s1.concat(s2); // "abcdef"
   ```
 - 2、Array.concat(arr)
-  ```
-  var s1=[1,2,3]
-  var s2=[4,5,6]
-  s1.concat(s2) //[1,2,3,4,5,6]
+  ```js
+  var s1 = [1, 2, 3];
+  var s2 = [4, 5, 6];
+  s1.concat(s2); //[1,2,3,4,5,6]
   ```
 - 3、字符串和数组混用
-  ```
-  var s1=[1,2,3]
-  var s2='444'
-  s1.concat(s2) // [1, 2, 3, "444"]
-  s2.concat(s1) // "4441,2,3"
+  ```js
+  var s1 = [1, 2, 3];
+  var s2 = '444';
+  s1.concat(s2); // [1, 2, 3, "444"]
+  s2.concat(s1); // "4441,2,3"
   ```
 
 ### 5. slice()方法
@@ -187,7 +185,7 @@ yearMonth.substring(4);  得到："12"
 
   返回一个子片段，对原先的 string 没有影响,与 subString 的区别是，还可以用负数当参数
 
-  ```
+  ```js
   var s = "1234567";
   s.slice(0,4)  得到："1234"
   s.slice(2,4)  得到："34"
@@ -199,38 +197,38 @@ yearMonth.substring(4);  得到："12"
 
   返回从 start 开始到 end 的子数组
 
-  ```
-  var a = [1,2,3,4,5];
-  a.slice(0,3);    // Returns [1,2,3]
-  a.slice(3);      // Returns [4,5]
-  a.slice(1,-1);   // Returns [2,3,4]
+  ```js
+  var a = [1, 2, 3, 4, 5];
+  a.slice(0, 3); // Returns [1,2,3]
+  a.slice(3); // Returns [4,5]
+  a.slice(1, -1); // Returns [2,3,4]
   ```
 
 ### 6.includes()方法
 
 用来判断一个数组是否包含一个指定的值，如果是返回 true，否则 false。
 
-```
-[1, 2, 3].includes(2);     // true
-[1, 2, 3].includes(4);     // false
+```js
+[1, 2, 3].includes(2); // true
+[1, 2, 3].includes(4); // false
 ```
 
 ### 7.some()方法
 
 用于检测数组中的元素是否满足指定条件
 
-```
+```js
 let ages = [3, 10, 18, 20];
-let hasAdult= ages.some( age => age>=18 ) //true
+let hasAdult = ages.some((age) => age >= 18); //true
 ```
 
 ### 8.every()方法
 
 用于检测数组所有元素是否都符合指定条件（通过函数提供）
 
-```
+```js
 let ages = [3, 10, 18, 20];
-let allAdult= ages.every( age => age>=18 ) //false
+let allAdult = ages.every((age) => age >= 18); //false
 ```
 
 ### 9.其他
@@ -241,41 +239,41 @@ let allAdult= ages.every( age => age>=18 ) //false
 
 ### 10.replace：【replace(/[\$,]/g, '')替换所有的$,】
 
-```
-let data='$433,060',
-    d1=data.replace(/[\$,]/g, ''),
-    d2=data.replace(/[\$,]/g, '')*1
-console.log(d1,typeof d1)   //433060 string
-console.log(d2,typeof d2)   //433060 number
+```js
+let data = '$433,060',
+  d1 = data.replace(/[\$,]/g, ''),
+  d2 = data.replace(/[\$,]/g, '') * 1;
+console.log(d1, typeof d1); //433060 string
+console.log(d2, typeof d2); //433060 number
 ```
 
 #### 集合筛选
 
 > 两个集合数据筛选
 
-```
-let arr=[100,2,300,400]
-let users=[{id:1},{id:2},{id:3},{id:4}]
-let userFil = users.filter(item => {
-	return arr.indexOf(item.id) > -1
-})
-console.log(userFil)
+```js
+let arr = [100, 2, 300, 400];
+let users = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+let userFil = users.filter((item) => {
+  return arr.indexOf(item.id) > -1;
+});
+console.log(userFil);
 ```
 
 ## 三、项目中的 js 方法记录
 
 - 方法简写
 
-```
+```js
 //参数：根目录下的dir文件夹名称
 //返回：dir对应的全路径值
-const resolve = dir => path.join(__dirname, dir)
-resolve('src')  //返回src目录的全路径
+const resolve = (dir) => path.join(__dirname, dir);
+resolve('src'); //返回src目录的全路径
 ```
 
 - 标签、状态集合数据使用对象存储(类似 java 里面的 Map 或者枚举)<其实就是一种对应关系的数据集合>，这样写的目的是很清晰
 
-```
+```js
 // 这里的对象的属性值同上面，是使用了方法的值。
 const filter = {
     all: todos => todos,
@@ -294,7 +292,8 @@ statusMap: {
 
 - 遍历对象属性转换成数组使用
 
-```
+```js
+
 infoObj: {
   sqbh: '20220120088175',
   sqsj: '2021-12-10  14:30:15',

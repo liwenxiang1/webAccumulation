@@ -1,7 +1,8 @@
-# css知识
+# css 知识
 
-### 一、transition动画使用
-```
+### 一、transition 动画使用
+
+```js
 // 切换tab标签动画实现：每个tab-下的image标签只有一个，动态切换src和样式；使用transition实现属性动画。
 const getTabSrc = (item) => {
   if(item.img==state.sjlx)return require('../../assets/img/home/ckyb_'+item.img+'_sel.png')
@@ -21,36 +22,39 @@ const getTabSrc = (item) => {
   margin-top:0px;
 }
 ```
-今天项目中使用了`transition`动画，但是没有效果。排查发现设置对应的div元素样式为：`display: flex;`后才生效了。
+
+今天项目中使用了`transition`动画，但是没有效果。排查发现设置对应的 div 元素样式为：`display: flex;`后才生效了。
 
 ### 二、其他样式问题
 
-#### 1.多个class同时存在的样式
+#### 1.多个 class 同时存在的样式
 
-```
+```css
 //中间没有空格
 .question-item-text.answered {
-  color: #FFFFFF;
+  color: #ffffff;
   background: #195497;
   border: 1px solid #195497;
 }
 ```
-#### 1.1 class的子class样式（可以是多层级的子class）
-```
+
+#### 1.1 class 的子 class 样式（可以是多层级的子 class）
+
+```css
 //中间有空格
 .add-view .vux-x-icon {
   padding-top: 0px;
 }
 
 .fxsdbz-switch .weui-label::before {
-  content: "*";
+  content: '*';
   color: red;
 }
 ```
 
-#### 2.class所在的元素被点击
+#### 2.class 所在的元素被点击
 
-```
+```css
 .start-test:active {
   position: relative;
   cursor: pointer;
@@ -58,9 +62,9 @@ const getTabSrc = (item) => {
 }
 ```
 
-#### 3.class的子元素class样式
+#### 3.class 的子元素 class 样式
 
-```
+```css
 //一级子元素
 .analysis-text > .line2 {
   margin-top: 20px;
@@ -71,17 +75,17 @@ const getTabSrc = (item) => {
 }
 ```
 
-#### 4.多个html元素偶数个样式
+#### 4.多个 html 元素偶数个样式
 
-```
-tr:nth-child(2n+1) {
+```css
+tr:nth-child(2n + 1) {
   background: rgba(82, 139, 255, 0.1);
 }
 ```
 
-#### 5.多个html元素第一个和第二个样式
+#### 5.多个 html 元素第一个和第二个样式
 
-```
+```css
 th:first-child {
   width: 290px;
   border-top-left-radius: 17px;
@@ -93,10 +97,12 @@ th:last-child {
 }
 ```
 
-#### 6.多个class使用同一样式
+#### 6.多个 class 使用同一样式
 
-```
-.ver-layout, .ver-layout-center, .ver-layout-center-all {
+```css
+.ver-layout,
+.ver-layout-center,
+.ver-layout-center-all {
   display: flex;
   flex-direction: column;
 }
@@ -112,7 +118,8 @@ th:last-child {
 ```
 
 #### 7.图表添加灰色滤镜
-```
+
+```js
  //添加样式
  filter: grayscale(100%);
 ```
