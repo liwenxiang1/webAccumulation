@@ -184,7 +184,7 @@ export default defineUserConfig({
               link: '/algorithm/simple/比较字符串',
             },
             {
-              text: '找出数组重复次数组多的元素',
+              text: '找出数组重复次数最多的元素',
               link: '/algorithm/simple/数组重复次数',
             },
             {
